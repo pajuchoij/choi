@@ -49,11 +49,14 @@ public class BoardService {
                 .author(board.getAuthor())
                 .title(board.getTitle())
                 .content(board.getContent())
+                .fileId(board.getFileId())
                 .createdDate(board.getCreatedDate())
                 .build();
         return boardDto;
     }
 
+
+    @Transactional
     public void deletePost(Long id) {
         boardRepository.deleteById(id);
     }

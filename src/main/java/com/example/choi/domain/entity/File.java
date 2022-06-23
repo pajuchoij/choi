@@ -33,11 +33,9 @@ public class File {
 
     @Builder
     public File(Long id, String origFilename, String filename, String filePath) {
-
         this.id = id;
         this.origFilename = origFilename;
         this.filename = filename;
-        this. filePath = filePath;
+        this.filePath = filePath;
     }
-
 }
