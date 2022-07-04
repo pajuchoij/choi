@@ -1,13 +1,15 @@
 package com.example.choi.controller;
 
 
+
 import com.example.choi.dto.BoardDto;
 import com.example.choi.dto.FileDto;
 import com.example.choi.service.BoardService;
-
 import com.example.choi.service.FileService;
 import com.example.choi.util.MD5Generator;
+
 import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +18,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.annotation.Resource;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -34,7 +35,7 @@ public class BoardController {
         this.fileService = fileService;
     }
 
-    @GetMapping("/")
+    @GetMapping("/list")
     public String list(Model model) {
         List<BoardDto> boardDtoList = boardService.getBoardList();
         model.addAttribute("postList", boardDtoList);
@@ -79,7 +80,6 @@ public class BoardController {
         return "redirect:/";
     }
 
-
     @GetMapping("/post/{id}")
     public String detail(@PathVariable("id") Long id, Model model) {
         BoardDto boardDto = boardService.getPost(id);
@@ -97,20 +97,19 @@ public class BoardController {
     @PutMapping("/post/edit/{id}")
     public String update(BoardDto boardDto) {
         boardService.savePost(boardDto);
-        return "redirect:/";
+        return "redirect:/list";
     }
 
     @DeleteMapping("/post/{id}")
     public String delete(@PathVariable("id") Long id) {
         boardService.deletePost(id);
-        return "redirect:/";
+        return "redirect:/list";
     }
-
     @GetMapping("/download/{fileId}")
     public ResponseEntity<Resource> fileDownload(@PathVariable("fileId") Long fileId) throws IOException {
         FileDto fileDto = fileService.getFile(fileId);
         Path path = Paths.get(fileDto.getFilePath());
-        Resource resource = (Resource) new InputStreamResource(Files.newInputStream(path));
+        Resource resource = new InputStreamResource(Files.newInputStream(path));
         return ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType("application/octet-stream"))
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileDto.getOrigFilename() + "\"")

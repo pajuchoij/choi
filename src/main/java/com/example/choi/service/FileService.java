@@ -1,7 +1,7 @@
 package com.example.choi.service;
 
 import com.example.choi.domain.entity.File;
-import com.example.choi.domain.entity.repository.FileRepository;
+import com.example.choi.domain.repository.FileRepository;
 import com.example.choi.dto.FileDto;
 import org.springframework.stereotype.Service;
 

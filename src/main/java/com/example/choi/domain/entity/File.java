@@ -3,6 +3,7 @@
 package com.example.choi.domain.entity;
 
 
+
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -37,5 +38,8 @@ public class File {
         this.origFilename = origFilename;
         this.filename = filename;
         this.filePath = filePath;
+
     }
+
+
 }

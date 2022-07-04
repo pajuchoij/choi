@@ -1,4 +1,4 @@
-package com.example.choi.domain.entity.repository;
+package com.example.choi.domain.repository;
 
 
 import com.example.choi.domain.entity.Board;

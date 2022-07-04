@@ -2,7 +2,7 @@ package com.example.choi.service;
 
 
 import com.example.choi.domain.entity.Board;
-import com.example.choi.domain.entity.repository.BoardRepository;
+import com.example.choi.domain.repository.BoardRepository;
 import com.example.choi.dto.BoardDto;
 import org.springframework.stereotype.Service;
 
