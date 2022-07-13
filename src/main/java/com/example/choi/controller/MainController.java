@@ -12,4 +12,5 @@ public class MainController {
         model.addAttribute("x", "최준");
         return "hi";
     }
+
 }

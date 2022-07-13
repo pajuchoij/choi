@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="/webjars/bootstrap/4.5.0/css/bootstrap.min.css" />
 </head>
 <body>
-
 <div class="container">
     <form action="/post" method="post" enctype="multipart/form-data">
         <div class="form-group row">
@@ -48,27 +47,9 @@
 <script src="/webjars/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <script>
     $('.custom-file-input').on('change', function () {
-        const fileName = $(this).val().split('\\').pop();
+        var fileName = $(this).val().split('\\').pop();
         $(this).siblings('.custom-file-label').addClass('selected').html(fileName);
     });
 </script>
-<!-- 라이브리 시티 설치 코드 -->
-<div id="lv-container" data-id="city" data-uid="MTAyMC81NjY4Ny8zMzE1MQ==">
-    <script type="text/javascript">
-        (function(d, s) {
-            var j, e = d.getElementsByTagName(s)[0];
-
-            if (typeof LivereTower === 'function') { return; }
-
-            j = d.createElement(s);
-            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-            j.async = true;
-
-            e.parentNode.insertBefore(j, e);
-        })(document, 'script');
-    </script>
-    <noscript>라이브리 댓글 작성을 위해 JavaScript를 활성화 해주세요</noscript>
-</div>
-<!-- 시티 설치 코드 끝 -->
 </body>
 </html>
