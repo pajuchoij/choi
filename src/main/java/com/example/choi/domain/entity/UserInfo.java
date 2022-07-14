@@ -4,6 +4,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,6 +18,7 @@ import java.util.Set;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Getter
+@Table(name = "user_info")
 public class UserInfo implements UserDetails {
 
     @Id
@@ -33,11 +35,32 @@ public class UserInfo implements UserDetails {
     @Column(name = "auth")
     private String auth;
 
+    @Column(name = "address")
+    private String address;
+
+    @Column(name = "tel")
+    private String tel;
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "id")
+    private String id;
+
+    @Column(name = "nickname")
+    private String nickname;
+
     @Builder
-    public UserInfo(String email, String password, String auth) {
+    public UserInfo(String email, String password, String auth, String address, String tel,
+                    String name, String id, String nickname) {
         this.email = email;
         this.password = password;
         this.auth = auth;
+        this.address = address;
+        this.id = id;
+        this.tel = tel;
+        this.name = name;
+        this.nickname = nickname;
     }
 
     // 사용자의 권한을 콜렉션 형태로 반환
@@ -62,6 +85,10 @@ public class UserInfo implements UserDetails {
     public String getPassword() {
         return password;
     }
+
+
+
+
 
     // 계정 만료 여부 반환
     @Override

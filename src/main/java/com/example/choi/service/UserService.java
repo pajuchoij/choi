@@ -35,6 +35,12 @@ public class UserService implements UserDetailsService {
         return userRepository.save(UserInfo.builder()
                 .email(infoDto.getEmail())
                 .auth(infoDto.getAuth())
+                .address(infoDto.getAddress())
+                .tel(infoDto.getTel())
+                .name(infoDto.getName())
+                .nickname(infoDto.getNickname())
+                .id(infoDto.getId())
                 .password(infoDto.getPassword()).build()).getCode();
+
     }
 }
