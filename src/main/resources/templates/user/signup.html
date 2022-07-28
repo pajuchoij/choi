@@ -1,24 +1,86 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
 <head>
     <meta charset="UTF-8">
     <title>sign up</title>
+
+    <script type="text/javascript">
+        $("#overlappedID").click(function(){
+            $("#signup").attr("type", "button");
+            const id = $("#user_id").val();
+            $.ajax({
+                type: "get",
+                async: false,
+                url: "http://localhost:8080/member/idCheck",
+                data: {id: id},
+                success: function (data) {
+                    if(data == 1) {
+                        $("#olmessage").text("이미 사용중인 ID 입니다.");
+                        $("#olmessage").addClass("olmessagef");
+                        $("#olmessage").removeClass("olmessaget");
+                    }else {
+                        $("#olmessage").text("사용 가능한 ID 입니다.");
+                        $("#olmessage").addClass("olmessaget");
+                        $("#olmessage").removeClass("olmessagef");
+                        $("#signup").attr("type", "submit");
+                    }
+                }
+            })
+        });
+    </script>
+
+
 </head>
 <body>
 <h1>Sign Up</h1> <hr>
 
-<form th:action="@{/user}" method="POST">
+<form th:action="@{/user}" method="POST" modelattribute="infoDto" >
 
-    email : <input type="text" name="email"> <br>
-    password : <input type="password" name="password"> <br>
-    아이디 : <input type="text" name="id"> <br>
-    닉네임 : <input type="text" name="nickname"> <br>
-    이름 : <input type="text" name="name"> <br>
-    전화번호 : <input type="tel" name="tel"> <br>
-    주소 : <input type="text" name="address"> <br>
+
+    <div>
+        아이디 : <input type="text" name="id" id="id" placeholder="아이디를 입력해 주세요" /> <br>
+        <span th:text="${valid_id}"></span>
+        <button id="overlappedID" type="button">중복확인</button><br>
+        <span id="olmessage"></span>
+    </div>
+
+
+    <div>
+        password : <input type="password" name="password" placeholder="비밀번호를 입력해 주세요"> <br>
+        <span th:text="${valid_password}"></span>
+    </div>
+
+
+    <div>
+        email : <input type="text" name="email"  placeholder="이메일을 입력해 주세요"> <br>
+        <span th:text="${valid_email}"></span>
+    </div>
+
+
+    <div>
+        닉네임 : <input type="text" name="nickname" placeholder="닉네임을 입력해 주세요"> <br>
+        <span th:text="${valid_nickname}"></span>
+    </div>
+
+    <div>
+        이름 : <input type="text" name="name" placeholder="이름을 입력해 주세요"> <br>
+        <span th:text="${valid_name}"></span>
+    </div>
+
+    <div>
+        전화번호 : <input type="tel" name="tel"placeholder=" - 를 빼고 연락처를 입력해 주세요"> <br>
+        <span th:text="${valid_tel}"> <br> </span>
+    </div>
+
+    <div>
+    주소 : <input type="text" name="address" placeholder="주소를 입력해 주세요"> <br>
+    <span th:text="${valid_address}"> <br> </span>
+    </div>
+
     <input type="radio" name="auth" value="ROLE_ADMIN,ROLE_USER"> admin
     <input type="radio" name="auth" value="ROLE_USER" checked="checked"> user <br>
-    <button type="submit">Join</button>
+    <button type="submit">회원가입</button>
 </form> <br>
 
 <a href="/login">Go to login →</a>

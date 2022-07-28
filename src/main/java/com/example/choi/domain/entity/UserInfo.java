@@ -19,6 +19,8 @@ import java.util.Set;
 @Entity
 @Getter
 @Table(name = "user_info")
+
+
 public class UserInfo implements UserDetails {
 
     @Id
@@ -26,6 +28,8 @@ public class UserInfo implements UserDetails {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long code;
 
+    @Column(name = "id", unique = true)
+    private String id;
     @Column(name = "email", unique = true)
     private String email;
 
@@ -44,8 +48,6 @@ public class UserInfo implements UserDetails {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "id")
-    private String id;
 
     @Column(name = "nickname")
     private String nickname;
@@ -77,7 +79,7 @@ public class UserInfo implements UserDetails {
     // 사용자의 id를 반환 (unique한 값)
     @Override
     public String getUsername() {
-        return email;
+        return nickname;
     }
 
     // 사용자의 password를 반환
@@ -85,9 +87,6 @@ public class UserInfo implements UserDetails {
     public String getPassword() {
         return password;
     }
-
-
-
 
 
     // 계정 만료 여부 반환

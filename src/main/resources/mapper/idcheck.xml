@@ -1,0 +1,3 @@
+<select id="overlappedID" parameterType="UserInfoDto" resultType="int">
+    select count(id) From user_info where id=#{id}
+</select>
