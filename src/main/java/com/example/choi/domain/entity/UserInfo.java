@@ -28,8 +28,8 @@ public class UserInfo implements UserDetails {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long code;
 
-    @Column(name = "id", unique = true)
-    private String id;
+    @Column(name = "userid", unique = true)
+    private String userid;
     @Column(name = "email", unique = true)
     private String email;
 
@@ -54,12 +54,12 @@ public class UserInfo implements UserDetails {
 
     @Builder
     public UserInfo(String email, String password, String auth, String address, String tel,
-                    String name, String id, String nickname) {
+                    String name, String userid, String nickname) {
         this.email = email;
         this.password = password;
         this.auth = auth;
         this.address = address;
-        this.id = id;
+        this.userid = userid;
         this.tel = tel;
         this.name = name;
         this.nickname = nickname;

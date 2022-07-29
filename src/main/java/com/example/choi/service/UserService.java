@@ -4,7 +4,6 @@ import com.example.choi.domain.entity.UserInfo;
 import com.example.choi.domain.repository.UserRepository;
 import com.example.choi.dto.UserInfoDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -17,6 +16,7 @@ import org.springframework.validation.FieldError;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @Transactional // 로직을 처리하다 에러가 발생하면 변경된 데이터를 콜백
 @RequiredArgsConstructor
@@ -39,7 +39,7 @@ public class UserService implements UserDetailsService {
 
     @Override // 기본적인 반환 타입은 UserDetails, UserDetails를 상속받은 UserInfo로 반환 타입 지정 (자동으로 다운 캐스팅됨)
     public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException { // 시큐리티에서 지정한 서비스이기 때문에 이 메소드를 필수로 구현
-        return userRepository.findById(id)
+        return userRepository.findByUserid(id)
                 .orElseThrow(() -> new UsernameNotFoundException((id)));
     }
 
@@ -57,10 +57,24 @@ public class UserService implements UserDetailsService {
                 .tel(infoDto.getTel())
                 .name(infoDto.getName())
                 .nickname(infoDto.getNickname())
-                .id(infoDto.getId())
+                .userid(infoDto.getUserid())
                 .password(infoDto.getPassword()).build()).getCode();
+
+    }
+
+    //중복 검사 
+    public int checkId(String s_id){
+        Optional<UserInfo> findUsers = userRepository.findByUserid(s_id);
+        System.out.println(findUsers);
+        if(findUsers.isPresent()){
+            return 1;
+            
+        } else{
+            return 0;
+        }
 
     }
 
 
 }
+

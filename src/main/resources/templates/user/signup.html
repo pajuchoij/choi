@@ -5,28 +5,38 @@
     <meta charset="UTF-8">
     <title>sign up</title>
 
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript">
-        $("#overlappedID").click(function(){
-            $("#signup").attr("type", "button");
-            const id = $("#user_id").val();
-            $.ajax({
-                type: "get",
-                async: false,
-                url: "http://localhost:8080/member/idCheck",
-                data: {id: id},
-                success: function (data) {
-                    if(data == 1) {
-                        $("#olmessage").text("이미 사용중인 ID 입니다.");
-                        $("#olmessage").addClass("olmessagef");
-                        $("#olmessage").removeClass("olmessaget");
-                    }else {
-                        $("#olmessage").text("사용 가능한 ID 입니다.");
-                        $("#olmessage").addClass("olmessaget");
-                        $("#olmessage").removeClass("olmessagef");
-                        $("#signup").attr("type", "submit");
+        $(function (){
+            $("input[name='userid']").on("change",function (){
+                var s_id = $('#userid').val();
+                console.log("s_id : "+s_id);
+
+                // ajax 호출
+                $.ajax({
+                    data : {s_id : s_id},
+                    url : "IdChek",
+                    data_type : "json",
+                    success : function (data) {
+                        console.log(data);
+                        if(data == '0'){
+
+                            console.log("사용가능한 아이디 입니다")
+
+                            $("#IdCheck").text("사용가능한 아이디 입니다");
+                        } else if (data == "1") {
+
+                            console.log("이미 사용중인 아이디 입니다")
+
+                            $("#IdCheck").text("이미 사용중인 아이디 입니다");
+                        }
+                    },
+                    error : function (error) {
+                        console.log(error);
+                        alert("error :" + error);
                     }
-                }
-            })
+                });
+            });
         });
     </script>
 
@@ -35,14 +45,24 @@
 <body>
 <h1>Sign Up</h1> <hr>
 
+<!--
+<form>
+    <input type="text" name="id" id="id" style="float:left;">
+    <h3 id="text">[]</h3>
+</form>
+-->
 <form th:action="@{/user}" method="POST" modelattribute="infoDto" >
 
-
     <div>
-        아이디 : <input type="text" name="id" id="id" placeholder="아이디를 입력해 주세요" /> <br>
-        <span th:text="${valid_id}"></span>
-        <button id="overlappedID" type="button">중복확인</button><br>
-        <span id="olmessage"></span>
+        아이디 : <input type="text" name="userid" id="userid" placeholder="아이디를 입력해 주세요" /> <br>
+        <span th:text="${valid_userid}"></span>
+        <span id="IdCheck"></span>
+
+
+
+
+        <!--<button id="overlappedID" type="button">중복확인</button><br>
+        <span id="olmessage"></span> -->
     </div>
 
 

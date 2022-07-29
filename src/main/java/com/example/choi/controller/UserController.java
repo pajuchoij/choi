@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.lang.reflect.Member;
 import java.util.Map;
 
 
@@ -57,5 +58,10 @@ public class UserController {
         return "redirect:/login";
     }
 
+    @RequestMapping(value = "/IdChek")
+    @ResponseBody
+    public int checkId(String s_id) {
+        return userService.checkId(s_id);
+    }
 
 }

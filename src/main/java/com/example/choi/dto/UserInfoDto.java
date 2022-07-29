@@ -1,10 +1,8 @@
 package com.example.choi.dto;
 
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.security.core.userdetails.User;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -16,9 +14,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @NoArgsConstructor
-@Data
 public class UserInfoDto implements Serializable {
-
 
 
     @NotBlank(message = "이메일은 필수 입력사항입니다.")
@@ -46,7 +42,7 @@ public class UserInfoDto implements Serializable {
     private String tel;
 
     @NotBlank(message = "아이디는 필수 입력사항입니다.")
-    private String id;
+    private String userid;
 
     @NotBlank
     private String auth;
@@ -54,4 +50,9 @@ public class UserInfoDto implements Serializable {
 
 
 
+
 }
+
+    
+
+
