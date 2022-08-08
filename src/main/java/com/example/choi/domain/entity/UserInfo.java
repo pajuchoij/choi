@@ -19,6 +19,8 @@ import java.util.Set;
 @Entity
 @Getter
 @Table(name = "user_info")
+
+
 public class UserInfo implements UserDetails {
 
     @Id
