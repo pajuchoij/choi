@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
+    <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <title>마이페이지</title>
+    <link rel="icon" type="images/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="stylesheet" href="/css/import.css">
+    <script src="/js/jquery-3.6.0.min.js"></script>
+    <script src="/js/header.js"></script>
+</head>
+<body>
+<header class="ColorH">
+    <h1><a href="index.html"><img src="/images/Color_Logo.png" alt=""></a></h1>
+    <nav>
+        <button type="button" class="bobile">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <ul class="gnb clear">
+            <li>운영정보
+                <ul>
+                    <li><a href="Notification_information.html">질병정보</a></li>
+                    <li><a href="operation_information.html ">작물 농사 방법</a></li>
+                </ul>
+            </li>
+            <li>분양정보
+                <ul>
+                    <li><a href="Sale_list3.html">분양리스트</a></li>
+                </ul>
+            </li>
+            <li>소통
+                <ul>
+                    <li><a href="/boardList/standard">자유 게시판</a></li>
+                    <li><a href="/boardList/qna">질문</a></li>
+                    <li><a href="/boardList/Notice">공지사항</a></li>
+                </ul>
+            </li>
+            <li>공유
+                <ul>
+                    <li><a href="/boardList/sell">내 작물 판매</a></li>
+                    <li><a href="/boardList/free">내 작물 무료나눔</a></li>
+                </ul>
+            </li>
+            <li><a href="MyPage.html">마이페이지</a></li>
+        </ul>
+    </nav>
+    <span class="login"><a href="login.html">로그인</a></span>
+</header>
+
+
+    <div class="comubg">comuBG</div>
+        
+    <section class="readpage1">
+
+        <h2>must reading</h2>
+        <div>
+            <button><a id='toList' >목록</a></button>
+        </div>
+
+        <div>
+            <div>
+                <a id="bbsname" th:href="@{'/bbs/list/' + ${post.bbstype}}"}> </a>
+                <h3 th:text="${post.title}"></h3>
+                <p th:text="${post.username}"></p>
+                <small
+                        class="text-muted"
+                        th:text="${#temporals.format(post.createdDate, 'yyyy-MM-dd HH:mm')}"
+                ></small>
+            </div>
+            <div>
+                <textarea  id="ir1" name="content" rows="10" cols="100" style=" width: 100%; height: 620px;"  th:text="${post.content}"></textarea>
+            </div>
+        </div>
+
+        <div>
+            <button><a th:href="@{'/bbs/post-edit/' + ${post.id}}">저 장</a></button>
+            <button><a th:href="@{'/bbs/post-del/' + ${post.id}}">삭 제</a></button>
+        </div>
+
+        <form class="CommentForm">
+            <div>
+                <h3>댓글</h3> <span class="active">등록순</span> <span>최신순</span> <span>신고</span>
+            </div>
+            <input type="text" name="" id="" placeholder="로그인 후 이용해 주세요."><button>댓글 등록</button>
+            <ul>
+                <li>
+                    <h4>왜그러고사냐</h4>
+                    <p>형 사랑해 ♡ 공지필독할게 ♡</p>
+                    <time>2022-04-26</time>
+                </li>
+                <li>
+                    <h4>왜그러고사냐</h4>
+                    <p>형 사랑해 ♡ 공지필독할게 ♡</p>
+                    <time>2022-04-26</time>
+                </li>
+                <li>
+                    <h4>왜그러고사냐</h4>
+                    <p>형 사랑해 ♡ 공지필독할게 ♡</p>
+                    <time>2022-04-26</time>
+                </li>
+                <li>
+                    <h4>왜그러고사냐</h4>
+                    <p>형 사랑해 ♡ 공지필독할게 ♡</p>
+                    <time>2022-04-26</time>
+                </li>
+                <li>
+                    <h4>왜그러고사냐</h4>
+                    <p>형 사랑해 ♡ 공지필독할게 ♡</p>
+                    <time>2022-04-26</time>
+                </li>
+            </ul>
+        </form>
+        <div class="paging">
+            <ol>
+                <li class="tabBtn active" data-tab="Qtab1">1</li>
+            </ol>
+        </div>
+    </section>
+<script>
+    var strName = "";
+    var strType = "[[${post.bbstype}]]".toString().toLowerCase();
+
+
+    switch(strType){
+        case "standard" :strName = "자유 게시판";
+            break;
+        case "qna" :strName = "질문 게시판";
+            break;
+        case "sell" :strName = "내 작물 판매 게시판";
+            break;
+        case "free" :strName = "무료나눔 게시판";
+            break;
+        default : strName = ""; }
+
+    //document.getElementById("bbsname").innerText = strName;
+    //document.getElementById("toList").herf = "/bbs/list/"+strType;
+    $("#bbsname").text(strName);
+    $("#toList").attr('href', "/bbs/list/"+strType);
+</script>
+    <footer>
+        <div>
+            <h1><a href="../../../../../../../../Last_Dance-main/Last_Dance-main/index.html">My Little Farm</a></h1>
+            <div>
+                <ul>
+                    <li>운영정보
+                        <ul>
+                            <li><a href="../../../../../../../../Last_Dance-main/Last_Dance-main/Notification_information.html">질병정보</a></li>
+                            <li><a href="../../../../../../../../Last_Dance-main/Last_Dance-main/operation_information.html ">작물 농사 방법</a></li>
+                        </ul>
+                    </li>
+                    <li>분양정보
+                        <ul>
+                            <li><a href="../../../../../../../../Last_Dance-main/Last_Dance-main/Sale_list.html">분양리스트</a></li>
+                        </ul>
+                    </li>
+                    <li>소통
+                        <ul>
+                            <li><a href="../../../../../../../../Last_Dance-main/Last_Dance-main/bulletin_board.html">자유 게시판</a></li>
+                            <li><a href="../../../../../../../../Last_Dance-main/Last_Dance-main/Questions_%20board.html">질문</a></li>
+                            <li><a href="../../../../../../../../Last_Dance-main/Last_Dance-main/Notice.html">공지사항</a></li>
+                        </ul>
+                    </li>
+                    <li>공유
+                        <ul>
+                            <li><a href="Selling">내 작물 판매</a></li>
+                            <li><a href="../../../../../../../../Last_Dance-main/Last_Dance-main/Free_selling.html">내 작물 무료나눔</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="../../../../../../../../Last_Dance-main/Last_Dance-main/MyPage.html">마이페이지</a></li>
+                </ul>
+            </div>
+            <div>
+                <address>
+                    <p>E-Mail :<a href="gksrlvy7138@gmail.com"> gksrlvy7138@gmail.com</a></p>
+                    <p>" 주소 : 서울시 서초구 서초대로74길 33 비트빌 3층"</p>
+                    <p>Tel :<a href="tel:+820234863456"> 02 - 3486 - 3456</a></p>
+                </address>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

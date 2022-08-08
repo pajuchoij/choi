@@ -1,13 +1,10 @@
 package com.example.choi.controller;
 
-
-
-import com.example.choi.dto.BoardDto;
+import com.example.choi.dto.BillboardDto;
 import com.example.choi.dto.FileDto;
-import com.example.choi.service.BoardService;
+import com.example.choi.service.BillboardService;
 import com.example.choi.service.FileService;
 import com.example.choi.util.MD5Generator;
-
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -26,29 +23,30 @@ import java.nio.file.Paths;
 import java.util.List;
 
 @Controller
-public class BoardController {
-    private BoardService boardService;
+public class BillboardController {
+    private BillboardService billboardService;
     private FileService fileService;
 
-    public BoardController(BoardService boardService, FileService fileService) {
-        this.boardService = boardService;
+    public BillboardController(BillboardService billboardService, FileService fileService) {
+        this.billboardService = billboardService;
         this.fileService = fileService;
     }
 
-    @GetMapping("/list")
-    public String list(Model model) {
-        List<BoardDto> boardDtoList = boardService.getBoardList();
-        model.addAttribute("postList", boardDtoList);
-        return "board/list";
+    @GetMapping("/bbs/list/{bbstype}") //게시판 리스트 이동
+    public String list(@PathVariable("bbstype") String bbstype,Model model) {
+        List<BillboardDto> billboardDtoList = billboardService.getBillboardList(bbstype);
+        model.addAttribute("postList", billboardDtoList);
+        return "billboard/boardlist";
     }
 
-    @GetMapping("/post")
+    @GetMapping("bbs/post")  //작성페이지 이동
     public String post() {
-        return "board/post";
+        return "billboard/boardwrite";
     }
 
-    @PostMapping("/post")
-    public String write(@RequestParam("file") MultipartFile files, BoardDto boardDto) {
+    @PostMapping("bbs/post")  // 게시물 저장
+    public String write(@RequestParam("file") MultipartFile files, BillboardDto billboardDto) {
+            String bbstype = billboardDto.getBbstype();
         try {
             String origFilename = files.getOriginalFilename();
             String filename = new MD5Generator(origFilename).toString();
@@ -72,40 +70,45 @@ public class BoardController {
             fileDto.setFilePath(filePath);
 
             Long fileId = fileService.saveFile(fileDto);
-            boardDto.setFileId(fileId);
-            boardService.savePost(boardDto);
+            billboardDto.setFileId(fileId);
+            billboardService.savePost(billboardDto);
+
         } catch(Exception e) {
             e.printStackTrace();
         }
-        return "redirect:/list";
+        return "redirect:/bbs/list/"+bbstype;
     }
 
-    @GetMapping("/post/{id}")
+    @GetMapping("bbs/post/{id}") // 게시물 상세보기
     public String detail(@PathVariable("id") Long id, Model model) {
-        BoardDto boardDto = boardService.getPost(id);
-        model.addAttribute("post", boardDto);
-        return "board/detail";
+        BillboardDto billboardDto = billboardService.getPost(id);
+        model.addAttribute("post", billboardDto);
+        billboardService.updateView(id); // views ++
+
+        return "billboard/boardview";
     }
 
-    @GetMapping("/post/edit/{id}")
+    @GetMapping("bbs/modify/{id}") //게시물 수정페이지 이동
     public String edit(@PathVariable("id") Long id, Model model) {
-        BoardDto boardDto = boardService.getPost(id);
-        model.addAttribute("post", boardDto);
-        return "board/edit";
+        BillboardDto billboardDto = billboardService.getPost(id);
+        model.addAttribute("post", billboardDto);
+        return "billboard/boardmodify";
     }
 
-    @PutMapping("/post/edit/{id}")
-    public String update(BoardDto boardDto) {
-        boardService.savePost(boardDto);
-        return "redirect:/list";
+    @PutMapping("bbs/modify/{id}") //게시물 수정 저장
+    public String update(BillboardDto billboardDto) {
+        billboardService.modifyPost(billboardDto);
+        return "redirect:/bbs/list/"+billboardDto.getBbstype();
     }
 
-    @DeleteMapping("/post/{id}")
-    public String delete(@PathVariable("id") Long id) {
-        boardService.deletePost(id);
-        return "redirect:/list";
+    @GetMapping("/bbs/post-del/{id}") //게시물 삭제
+    public String delete(@PathVariable("id") Long id, BillboardDto billboardDto) {
+        billboardDto = billboardService.getPost(id);
+        String bbstype = billboardDto.getBbstype();
+        billboardService.deletePost(id);
+        return "redirect:/bbs/list/"+bbstype;
     }
-    @GetMapping("/download/{fileId}")
+    @GetMapping("bbs/download/{fileId}")
     public ResponseEntity<Resource> fileDownload(@PathVariable("fileId") Long fileId) throws IOException {
         FileDto fileDto = fileService.getFile(fileId);
         Path path = Paths.get(fileDto.getFilePath());
