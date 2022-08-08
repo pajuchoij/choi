@@ -14,7 +14,7 @@
 </head>
 <body>
 <header class="NoneColor-Header">
-    <h1><a href="index.html"><img src="/images/main_Logo.png" alt="my little farm"></a></h1>
+    <h1><a href="/"><img src="/images/main_Logo.png" alt="my little farm"></a></h1>
     <nav>
         <button type="button" class="bobile">
             <span></span>
@@ -73,7 +73,7 @@
                 <div th:if="${session['SPRING_SECURITY_LAST_EXCEPTION']} != null">
                     <span class="SECURITY-id" th:text="${session['SPRING_SECURITY_LAST_EXCEPTION'].message}"></span>
             </div>
-            <input type="submit" value="LOGIN">
+            <input style="margin-top:30px" type="submit" value="LOGIN">
             <!--<a href="/oauth2/authorization/google">구글 아이디로 로그인</a> -->
 
             <ul>
@@ -84,13 +84,14 @@
             <div>
                 <a href="/signup">회원가입</a><a href="">아이디찾기</a><a href="">비밀번호찾기</a>
             </div>
+            </div>
         </fieldset>
     </form>
 </section>
 
 <footer>
     <div>
-        <h1><a href="index.html">My Little Farm</a></h1>
+        <h1><a href="/">My Little Farm</a></h1>
         <div>
             <ul>
                 <li>운영정보
@@ -117,7 +118,7 @@
                         <li><a href="Free_selling.html">내 작물 무료나눔</a></li>
                     </ul>
                 </li>
-                <li><a href="MyPage.html">마이페이지</a></li>
+                <li><a href="/MyPage">마이페이지</a></li>
             </ul>
         </div>
         <div>
