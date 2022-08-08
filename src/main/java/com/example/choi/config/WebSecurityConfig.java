@@ -3,6 +3,7 @@ package com.example.choi.config;
 
 import com.example.choi.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -17,30 +18,40 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter { // 2
 
     private final UserService userService; // 3
+    private final CustomOAuth2UserService customOAuth2UserService;
+
 
     @Override
     public void configure(WebSecurity web) { // 4
-        web.ignoring().antMatchers("/css/**", "/js/**", "/img/**");
+        web.ignoring().antMatchers("/css/**", "/js/**", "/images/**");
+        web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations());    // 정적인 리소스들에 대해서 시큐리티 적용 무시.
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception { // 5
         http
                 .authorizeRequests() // 6
-                .antMatchers("/login", "/signup", "/user").permitAll() // 누구나 접근 허용
-                .antMatchers("/").hasRole("USER") // USER, ADMIN만 접근 가능
+                .antMatchers("/login", "/signup", "/user", "/IdChek", "/MyPageWrite", "/").permitAll() // 누구나 접근 허용
+                .antMatchers("/MyPage").hasRole("USER") // USER, ADMIN만 접근 가능
                 .antMatchers("/admin").hasRole("ADMIN") // ADMIN만 접근 가능
-                .anyRequest().authenticated() // 나머지 요청들은 권한의 종류에 상관 없이 권한이 있어야 접근 가능
+                .anyRequest().permitAll()//.authenticated() // 나머지 요청들은 권한의 종류에 상관 없이 권한이 있어야 접근 가능
                 .and()
-                .formLogin() // 7
-                .loginPage("/login") // 로그인 페이지 링크
-                .defaultSuccessUrl("/") // 로그인 성공 후 리다이렉트 주소
+                    .formLogin() // 7
+                    .loginPage("/login") // 로그인 페이지 링크
+                    .defaultSuccessUrl("/") // 로그인 성공 후 리다이렉트 주소
                 .and()
-                .logout() // 8
-                .logoutSuccessUrl("/") // 로그아웃 성공시 리다이렉트 주소
-                .invalidateHttpSession(true) // 세션 날리기
+                    .logout() // 8
+                    .logoutSuccessUrl("/") // 로그아웃 성공시 리다이렉트 주소
+                    .invalidateHttpSession(true) // 세션 날리기
+                .and() // Oauth2 로그인 기능에 대한 설정의 진입점.
+                    .oauth2Login()
+                    .loginPage("/login12")
+                    .userInfoEndpoint()
+                    .userService(customOAuth2UserService)
+
         ;
     }
+
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception { // 9

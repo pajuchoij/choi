@@ -18,7 +18,7 @@ import java.util.Set;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Getter
-
+@Table(name = "user_info")
 public class UserInfo implements UserDetails {
 
     @Id
@@ -26,6 +26,8 @@ public class UserInfo implements UserDetails {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long code;
 
+    @Column(name = "userid", unique = true)
+    private String userid;
     @Column(name = "email", unique = true)
     private String email;
 
@@ -44,20 +46,18 @@ public class UserInfo implements UserDetails {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "id")
-    private String id;
 
     @Column(name = "nickname")
     private String nickname;
 
     @Builder
     public UserInfo(String email, String password, String auth, String address, String tel,
-                    String name, String id, String nickname) {
+                    String name, String userid, String nickname) {
         this.email = email;
         this.password = password;
         this.auth = auth;
         this.address = address;
-        this.id = id;
+        this.userid = userid;
         this.tel = tel;
         this.name = name;
         this.nickname = nickname;
@@ -65,6 +65,7 @@ public class UserInfo implements UserDetails {
 
     // 사용자의 권한을 콜렉션 형태로 반환
     // 단, 클래스 자료형은 GrantedAuthority를 구현해야함
+    // 권한이 중복되면 안 되기 때문에 Set<GrantedAuthority>을 사용
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Set<GrantedAuthority> roles = new HashSet<>();
@@ -77,7 +78,7 @@ public class UserInfo implements UserDetails {
     // 사용자의 id를 반환 (unique한 값)
     @Override
     public String getUsername() {
-        return email;
+        return nickname;
     }
 
     // 사용자의 password를 반환
@@ -85,9 +86,6 @@ public class UserInfo implements UserDetails {
     public String getPassword() {
         return password;
     }
-
-
-
 
 
     // 계정 만료 여부 반환
