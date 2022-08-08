@@ -1,21 +1,21 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>main</title>
-    <link rel="icon" type="images/png" sizes="32x32" href="images/favicon-32x32.png">
-    <link rel="stylesheet" href="css/import.css">
+    <link rel="icon" type="images/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="stylesheet" href="/css/import.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="js/jquery-3.6.0.min.js"></script>
-    <script src="js/header.js"></script>
-    <script src="js/weather.js"></script>
+    <script src="/js/jquery-3.6.0.min.js"></script>
+    <script src="/js/header.js"></script>
+    <script src="/js/weather.js"></script>
 </head>
 <body>
     <header class="NoneColor-Header">
-        <h1><a href="index.html"><img src="images/main_Logo.png" alt="my little farm"></a></h1>
+        <h1><a href="index.html"><img src="/images/main_Logo.png" alt="my little farm"></a></h1>
         <nav>
             <button type="button" class="bobile">
                 <span></span>
@@ -50,7 +50,7 @@
                 <li><a href="MyPage.html">마이페이지</a></li>
             </ul>
         </nav>
-    <span sec:authorize="isAnonymous()" class="login"><a href="/login">로그인</a></span>
+    <span sec:authorize="isAnonymous()" ><a href="/login">로그인</a></span>
 
         <form id="logout" action="/logout" method="POST">
             <span sec:authorize="isAuthenticated()">
@@ -59,12 +59,13 @@
                 <span class="logout"><a href="/logout" type="submit">로그아웃</a></span>
             </span>
         </form>
+
     </header>
 
     <section class="fix">
         <div class="mainbackground">
             <video autoplay muted loop>
-                <source src="mp4/gp.mp4" type="video/mp4">
+                <source src="/mp4/gp.mp4" type="video/mp4">
             </video>
             <div class="MainV">
                 <div>
@@ -82,7 +83,7 @@
         <h2>WEATHER</h2>
         <div id="showWeatherForcast">
         </div>
-            <img src="images/ccccccc.png" alt="">
+            <img src="/images/ccccccc.png" alt="">
     </section>
 
     <section class="hob">
@@ -98,10 +99,10 @@
             <span></span><h2>친환경 도시텃밭 분양</h2><span></span>
         </div>
         <div>
-            <img class="parimg1" src="images/leaves_left.png" alt="">
-            <img src="images/main_D.png" alt="">
+            <img class="parimg1" src="/images/leaves_left.png" alt="">
+            <img src="/images/main_D.png" alt="">
             <p>낭만을 분양 받으세요 <br> <mark>-Choi.D.Jun-</mark></p>
-            <img class="parimg2" src="images/leaves_right.png" alt="">
+            <img class="parimg2" src="/images/leaves_right.png" alt="">
         </div>
         <a href="Sale_list.html">분양 신청</a>
     </section>
@@ -112,7 +113,7 @@
         </div>
     </section>
 
-    <script src="js/animation_scroll.js"></script>
+    <script src="/js/animation_scroll.js"></script>
     <footer>
         <div>
             <h1><a href="index.html">My Little Farm</a></h1>
