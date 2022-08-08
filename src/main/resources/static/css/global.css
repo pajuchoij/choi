@@ -14,6 +14,10 @@ body{
     font-family: 'Noto Sans KR', sans-serif;
 }
 
+ul{
+    list-style: none;
+}
+
 @media screen and (max-width: 767px){
     html{
         height: 100%;

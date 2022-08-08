@@ -67,6 +67,7 @@ public class UserInfo implements UserDetails {
 
     // 사용자의 권한을 콜렉션 형태로 반환
     // 단, 클래스 자료형은 GrantedAuthority를 구현해야함
+    // 권한이 중복되면 안 되기 때문에 Set<GrantedAuthority>을 사용
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Set<GrantedAuthority> roles = new HashSet<>();

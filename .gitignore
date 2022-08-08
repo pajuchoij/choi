@@ -35,3 +35,6 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### 소셜로그인 ###
+application-oauth.properties

@@ -3,6 +3,7 @@ package com.example.choi.config;
 
 import com.example.choi.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -17,6 +18,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter { // 2
 
     private final UserService userService; // 3
+    private final CustomOAuth2UserService customOAuth2UserService;
+
 
     @Override
     public void configure(WebSecurity web) { // 4
@@ -27,7 +30,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter { // 2
     protected void configure(HttpSecurity http) throws Exception { // 5
         http
                 .authorizeRequests() // 6
-                .antMatchers("/login", "/signup", "/user", "/IdChek", "/MyPage","/MyPageWrite","/bbs").permitAll() // 누구나 접근 허용
+                .antMatchers("/login", "/signup", "/user", "/IdChek", "/MyPage","/MyPageWrite").permitAll() // 누구나 접근 허용
                 .antMatchers("/").hasRole("USER") // USER, ADMIN만 접근 가능
                 .antMatchers("/admin").hasRole("ADMIN") // ADMIN만 접근 가능
                 .anyRequest().permitAll()//.authenticated() // 나머지 요청들은 권한의 종류에 상관 없이 권한이 있어야 접근 가능

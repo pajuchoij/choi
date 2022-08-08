@@ -1,10 +1,12 @@
 package com.example.choi.controller;
 
-import com.example.choi.domain.entity.UserInfo;
 import com.example.choi.dto.UserInfoDto;
 import com.example.choi.service.UserService;
 
+
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
@@ -13,9 +15,11 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import javax.validation.Valid;
-import java.lang.reflect.Member;
+
 import java.util.Map;
+
 
 
 
@@ -29,6 +33,7 @@ public class UserController {
     public String dispSignup(UserInfoDto infoDto) {
         return "user/signup";
     }
+
 
     @PostMapping("/user")
     public String signup(@Valid UserInfoDto infoDto, Errors errors, Model model) { // 회원 추가
@@ -51,7 +56,6 @@ public class UserController {
 
     }
 
-
     @GetMapping(value = "/logout")
     public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
         new SecurityContextLogoutHandler().logout(request, response, SecurityContextHolder.getContext().getAuthentication());
@@ -63,5 +67,8 @@ public class UserController {
     public int checkId(String s_id) {
         return userService.checkId(s_id);
     }
+
+
+
 
 }
