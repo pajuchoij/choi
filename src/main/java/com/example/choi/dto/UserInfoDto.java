@@ -34,7 +34,7 @@ public class UserInfoDto implements Serializable {
     //@Pattern(regexp = "^[ㄱ-ㅎ가-힣a-z0-9-_]{2,10}$", message = "닉네임은 특수문자를 제외한 2~10자리여야 합니다.")
     private String nickname;
 
-    @NotBlank(message = "주소는 필수 입력사항입니다.")
+    //@NotBlank(message = "주소는 필수 입력사항입니다.")
     private String address;
 
     @NotBlank(message = "휴대폰 번호는 필수 입력사항입니다.")
@@ -42,6 +42,7 @@ public class UserInfoDto implements Serializable {
     private String tel;
 
     @NotBlank(message = "아이디는 필수 입력사항입니다.")
+    @Pattern(regexp = "^[ㄱ-ㅎ가-힣a-z0-9-_]{2,10}$", message = "ID 특수문자를 제외한 2~10자리여야 합니다.")
     private String userid;
 
     @NotBlank
