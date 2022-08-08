@@ -1,9 +1,15 @@
 <!DOCTYPE html>
-
-<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title>sign up</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+    <link rel="icon" type="images/png" sizes="32x32" href="images/favicon-32x32.png">
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="css/import.css">
+    <script src="js/header.js"></script>
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript">
@@ -39,70 +45,144 @@
             });
         });
     </script>
-
-
 </head>
 <body>
-<h1>Sign Up</h1> <hr>
+    <header class="ColorH">
+        <h1><a href="index.html"><img src="images/Color_Logo.png" alt="my little farm"></a></h1>
+        <nav>
+            <button type="button" class="bobile">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="gnb clear">
+                <li>운영정보
+                    <ul>
+                        <li><a href="Notification_information.html">질병정보</a></li>
+                        <li><a href="operation_information.html ">작물 농사 방법</a></li>
+                    </ul>
+                </li>
+                <li>분양정보
+                    <ul>
+                        <li><a href="Sale_list3.html">분양리스트</a></li>
+                    </ul>
+                </li>
+                <li>소통
+                    <ul>
+                        <li><a href="bulletin_board.html">자유 게시판</a></li>
+                        <li><a href="Questions_board.html">질문</a></li>
+                        <li><a href="Notice.html">공지사항</a></li>
+                    </ul>
+                </li>
+                <li>공유
+                    <ul>
+                        <li><a href="Selling.html">내 작물 판매</a></li>
+                        <li><a href="Free_selling.html">내 작물 무료나눔</a></li>
+                    </ul>
+                </li>
+                <li><a href="MyPage.html">마이페이지</a></li>
+            </ul>
+        </nav>
+        <li class="nav-item" sec:authorize="isAnonymous()">
+            <span class="login"><a class="nav-link" href="/login">로그인</a></span>
+        </li>
+        <li class="nav-item" sec:authorize="isAuthenticated()">
+            <span class="login"><a class="nav-link" href="/login">로그아웃</a></span>
+        </li>
+    </header>
 
-<!--
-<form>
-    <input type="text" name="id" id="id" style="float:left;">
-    <h3 id="text">[]</h3>
-</form>
--->
-<form th:action="@{/user}" method="POST" modelattribute="infoDto" >
+    <section class="joinSection">
+        <form th:action="@{/user}" method="POST" modelattribute="infoDto">
+            <p>회원가입</p>
+            <h2>MY LITTLE FARM</h2>
 
-    <div>
-        아이디 : <input type="text" name="userid" id="userid" placeholder="아이디를 입력해 주세요" /> <br>
-        <span th:text="${valid_userid}"></span>
-        <span id="IdCheck"></span>
+            <label for="">아이디</label>
+            <input type="text" name="userid" id="userid" placeholder="아이디를 입력해 주세요" /> <br>
+            <span th:text="${valid_userid}"></span>
+            <span id="IdCheck"></span>
 
 
+            <label for="">비밀번호</label>
+            <input type="password" name="password" placeholder="비밀번호를 입력해 주세요"> <br>
+            <span th:text="${valid_password}"></span>
 
 
-        <!--<button id="overlappedID" type="button">중복확인</button><br>
-        <span id="olmessage"></span> -->
-    </div>
+
+            <label for="">닉네임</label>
+            <input type="text" name="nickname" placeholder="닉네임을 입력해 주세요"> <br>
+            <span th:text="${valid_nickname}"></span>
 
 
-    <div>
-        password : <input type="password" name="password" placeholder="비밀번호를 입력해 주세요"> <br>
-        <span th:text="${valid_password}"></span>
-    </div>
+            <label for="">이름</label>
+            <input type="text" name="name" placeholder="이름을 입력해 주세요"> <br>
+            <span th:text="${valid_name}"></span>
 
 
-    <div>
-        email : <input type="text" name="email"  placeholder="이메일을 입력해 주세요"> <br>
-        <span th:text="${valid_email}"></span>
-    </div>
+
+            <label for="">E-mail</label>
+            <input type="text" name="email"  placeholder="이메일을 입력해 주세요"> <br>
+            <span th:text="${valid_email}"></span>
 
 
-    <div>
-        닉네임 : <input type="text" name="nickname" placeholder="닉네임을 입력해 주세요"> <br>
-        <span th:text="${valid_nickname}"></span>
-    </div>
+            <label for="">전화번호</label>
+            <input type="tel" name="tel"placeholder=" - 를 빼고 연락처를 입력해 주세요"> <br>
+            <span th:text="${valid_tel}"> <br> </span>
 
-    <div>
-        이름 : <input type="text" name="name" placeholder="이름을 입력해 주세요"> <br>
-        <span th:text="${valid_name}"></span>
-    </div>
 
-    <div>
-        전화번호 : <input type="tel" name="tel"placeholder=" - 를 빼고 연락처를 입력해 주세요"> <br>
-        <span th:text="${valid_tel}"> <br> </span>
-    </div>
+            <label for="">주소</label>
+            <input type="text" name="address" placeholder="주소를 입력해 주세요"> <br>
+            <span th:text="${valid_address}"> <br> </span>
 
-    <div>
-    주소 : <input type="text" name="address" placeholder="주소를 입력해 주세요"> <br>
-    <span th:text="${valid_address}"> <br> </span>
-    </div>
+           <!-- <input type="radio" name="auth" value="ROLE_ADMIN,ROLE_USER"> admin -->
+            <input type="hidden" name="auth" value="ROLE_USER" checked="checked"> <br>
+            
 
-    <input type="radio" name="auth" value="ROLE_ADMIN,ROLE_USER"> admin
-    <input type="radio" name="auth" value="ROLE_USER" checked="checked"> user <br>
-    <button type="submit">회원가입</button>
-</form> <br>
+                <button type="submit">가입 하기</button>
 
-<a href="/login">Go to login →</a>
+        </form>
+        <div class="joinbgimg"></div>
+    </section>
+
+    <footer>
+        <div>
+            <h1><a href="index.html">My Little Farm</a></h1>
+            <div>
+                <ul>
+                    <li>운영정보
+                        <ul>
+                            <li><a href="Notification_information.html">질병정보</a></li>
+                            <li><a href="operation_information.html ">작물 농사 방법</a></li>
+                        </ul>
+                    </li>
+                    <li>분양정보
+                        <ul>
+                            <li><a href="Sale_list3.html">분양리스트</a></li>
+                        </ul>
+                    </li>
+                    <li>소통
+                        <ul>
+                            <li><a href="bulletin_board.html">자유 게시판</a></li>
+                            <li><a href="Questions_board.html">질문</a></li>
+                            <li><a href="Notice.html">공지사항</a></li>
+                        </ul>
+                    </li>
+                    <li>공유
+                        <ul>
+                            <li><a href="Selling">내 작물 판매</a></li>
+                            <li><a href="Free_selling.html">내 작물 무료나눔</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="MyPage.html">마이페이지</a></li>
+                </ul>
+            </div>
+            <div>
+                <address>
+                    <p>E-Mail :<a href="gksrlvy7138@gmail.com"> gksrlvy7138@gmail.com</a></p>
+                    <p>" 주소 : 서울시 서초구 서초대로74길 33 비트빌 3층"</p>
+                    <p>Tel :<a href="tel:+820234863456"> 02 - 3486 - 3456</a></p>
+                </address>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
