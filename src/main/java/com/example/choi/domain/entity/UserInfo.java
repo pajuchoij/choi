@@ -18,7 +18,7 @@ import java.util.Set;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Getter
-@Table(name = "user_info")
+
 public class UserInfo implements UserDetails {
 
     @Id
