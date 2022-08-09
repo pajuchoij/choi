@@ -39,7 +39,7 @@ public class UserController {
     public String signup(@Valid UserInfoDto infoDto, Errors errors, Model model) { // 회원 추가
         if (errors.hasErrors()) {
             // 회원가입 실패시, 입력 데이터를 유지
-            model.addAttribute("UserInfoDto", infoDto);
+            model.addAttribute("infoDto", infoDto);
 
             // 유효성 통과 못한 필드와 메시지를 핸들링
             Map<String, String> validatorResult = userService.validateHandling(errors);
