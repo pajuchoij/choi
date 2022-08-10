@@ -25,38 +25,48 @@
             <ul class="gnb clear">
                 <li>운영정보
                     <ul>
-                        <li><a href="Notification_information.html">질병정보</a></li>
-                        <li><a href="operation_information.html ">작물 농사 방법</a></li>
+                        <li><a href="/Notification_information">질병정보</a></li>
+                        <li><a href="/operation_infomation">작물 농사 방법</a></li>
                     </ul>
                 </li>
                 <li>분양정보
                     <ul>
-                        <li><a href="Sale_list3.html">분양리스트</a></li>
+                        <li><a href="/Sale_list3">분양리스트</a></li>
                     </ul>
                 </li>
                 <li>소통
                     <ul>
-                        <li><a href="bulletin_board.html">자유 게시판</a></li>
-                        <li><a href="Questions_board.html">질문</a></li>
-                        <li><a href="Notice.html">공지사항</a></li>
+                        <li><a href="/bulletin_board">자유 게시판</a></li>
+                        <li><a href="/Questions_board">질문</a></li>
+                        <li><a href="/Notice">공지사항</a></li>
                     </ul>
                 </li>
                 <li>공유
                     <ul>
-                        <li><a href="Selling.html">내 작물 판매</a></li>
-                        <li><a href="Free_selling.html">내 작물 무료나눔</a></li>
+                        <li><a href="/Selling">내 작물 판매</a></li>
+                        <li><a href="/Free_selling">내 작물 무료나눔</a></li>
                     </ul>
                 </li>
-                <li><a href="/MyPage">마이페이지</a></li>
+                <li><a href="/MyPage">마이캘린더</a>
+                    <ul>
+                        <li sec:authorize="isAnonymous()" class="login" ><a href="/login">로그인</a></li>
+
+                        <form id="login" action="/logout" method="POST">
+                            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                            <li sec:authorize="isAuthenticated()" class="login"><a href="/logout" type="submit">로그아웃</a></li>
+                        </form>
+
+                    </ul>
+                </li>
             </ul>
         </nav>
-    <span sec:authorize="isAnonymous()" ><a href="/login">로그인</a></span>
+    <span sec:authorize="isAnonymous()" class="login"><a href="/login">로그인</a></span>
 
         <form id="logout" action="/logout" method="POST">
             <span sec:authorize="isAuthenticated()">
                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
         <!-- <span sec:authentication="name" ><a>님 환영합니다!</a></span>  ~~님 환영합니다! 가 안나옵니다 -->
-                <span class="logout"><a href="/logout" type="submit">로그아웃</a></span>
+                <span class="login"><a href="/logout" type="submit">로그아웃</a></span>
             </span>
         </form>
 
@@ -73,7 +83,7 @@
                         LITTLE<br>
                         FARM
                     </h2>
-                    <a href="Notification_information.html">작물 질병정보 보기</a>
+                    <a href="/Notification_information">작물 질병정보 보기</a>
                 </div>
             </div>
         </div>
@@ -104,7 +114,7 @@
             <p>낭만을 분양 받으세요 <br> <mark>-Choi.D.Jun-</mark></p>
             <img class="parimg2" src="/images/leaves_right.png" alt="">
         </div>
-        <a href="Sale_list.html">분양 신청</a>
+        <a href="/Sale_list">분양 신청</a>
     </section>
 
     <section class="WiseSaying">
@@ -116,34 +126,34 @@
     <script src="/js/animation_scroll.js"></script>
     <footer>
         <div>
-            <h1><a href="index.html">My Little Farm</a></h1>
+            <h1><a href="/">My Little Farm</a></h1>
             <div>
                 <ul>
                     <li>운영정보
                         <ul>
-                            <li><a href="Notification_information.html">질병정보</a></li>
-                            <li><a href="operation_information.html ">작물 농사 방법</a></li>
+                            <li><a href="/Notification_information">질병정보</a></li>
+                            <li><a href="/operation_infomation">작물 농사 방법</a></li>
                         </ul>
                     </li>
                     <li>분양정보
                         <ul>
-                            <li><a href="Sale_list3.html">분양리스트</a></li>
+                            <li><a href="/Sale_list3">분양리스트</a></li>
                         </ul>
                     </li>
                     <li>소통
                         <ul>
-                            <li><a href="bulletin_board.html">자유 게시판</a></li>
-                            <li><a href="Questions_board.html">질문</a></li>
-                            <li><a href="Notice.html">공지사항</a></li>
+                            <li><a href="/bulletin_board">자유 게시판</a></li>
+                            <li><a href="/Questions_board">질문</a></li>
+                            <li><a href="/Notice">공지사항</a></li>
                         </ul>
                     </li>
                     <li>공유
                         <ul>
-                            <li><a href="Selling">내 작물 판매</a></li>
-                            <li><a href="Free_selling.html">내 작물 무료나눔</a></li>
+                            <li><a href="/Selling">내 작물 판매</a></li>
+                            <li><a href="/Free_selling">내 작물 무료나눔</a></li>
                         </ul>
                     </li>
-                    <li><a href="MyPage.html">마이페이지</a></li>
+                    <li><a href="/MyPage">마이캘린더</a></li>
                 </ul>
             </div>
             <div>
