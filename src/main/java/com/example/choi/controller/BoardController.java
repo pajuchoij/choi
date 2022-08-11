@@ -115,4 +115,16 @@ public class BoardController {
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileDto.getOrigFilename() + "\"")
                 .body(resource);
     }
+
+    // 작물농사방법 컨트롤러
+    @GetMapping("/operation_infomation")
+    public String Operation_Information(){
+        return "board/operation_information";
+    }
+    // 작물질병정보 컨트롤러
+    @GetMapping("/Notification_information")
+    public String Notification_information(){
+        return "board/Notification_information";
+    }
+
 }

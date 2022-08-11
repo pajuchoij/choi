@@ -37,7 +37,7 @@ public class UserInfoDto implements Serializable {
     //@NotBlank(message = "주소는 필수 입력사항입니다.")
     private String address;
 
-    @NotBlank(message = "휴대폰 번호는 필수 입력사항입니다.")
+    @NotBlank(message = "전화번호는 필수 입력사항입니다.")
     @Pattern(regexp = "(01[016789])-?(\\d{3,4})-?(\\d{4})", message = "올바른 휴대폰 번호를 입력해주세요.")
     private String tel;
 

@@ -25,20 +25,20 @@
         <ul class="gnb clear">
             <li>운영정보
                 <ul>
-                    <li><a href="Notification_information.html">질병정보</a></li>
-                    <li><a href="operation_information.html ">작물 농사 방법</a></li>
+                    <li><a href="/Notification_info">질병정보</a></li>
+                    <li><a href="/operation_info ">작물 농사 방법</a></li>
                 </ul>
             </li>
             <li>분양정보
                 <ul>
-                    <li><a href="Sale_list3.html">분양리스트</a></li>
+                    <li><a href="/Sale_list">분양리스트</a></li>
                 </ul>
             </li>
             <li>소통
                 <ul>
                     <li><a href="/bbs/list/standard">자유 게시판</a></li>
                     <li><a href="/bbs/list/qna">질문</a></li>
-                    <li><a href="/bbs/list/Notice">공지사항</a></li>
+                    <li><a href="/bbs/list/notice">공지사항</a></li>
                 </ul>
             </li>
             <li>공유
@@ -47,7 +47,7 @@
                     <li><a href="/bbs/list/free">내 작물 무료나눔</a></li>
                 </ul>
             </li>
-            <li><a href="/MyPage">마이페이지</a></li>
+            <li><a href="/MyPage">마이캘린더</a></li>
         </ul>
     </nav>
     <span sec:authorize="isAnonymous()" ><a href="/login">로그인</a></span>
@@ -116,47 +116,47 @@
     document.getElementById("bbstype").value = "[[${post.bbstype}]]".toString().toLowerCase();
 </script>
 
-	<footer>
+<footer>
+    <div>
+        <h1><a href="/">My Little Farm</a></h1>
         <div>
-            <h1><a href="index.html">My Little Farm</a></h1>
-            <div>
-                <ul>
-                    <li>운영정보
-                        <ul>
-                            <li><a href="Notification_information.html">질병정보</a></li>
-                            <li><a href="operation_information.html ">작물 농사 방법</a></li>
-                        </ul>
-                    </li>
-                    <li>분양정보
-                        <ul>
-                            <li><a href="Sale_list3.html">분양리스트</a></li>
-                        </ul>
-                    </li>
-                    <li>소통
-                        <ul>
-                            <li><a href="bulletin_board.html">자유 게시판</a></li>
-                            <li><a href="Questions_ board.html">질문</a></li>
-                            <li><a href="Notice.html">공지사항</a></li>
-                        </ul>
-                    </li>
-                    <li>공유
-                        <ul>
-                            <li><a href="Selling">내 작물 판매</a></li>
-                            <li><a href="Free_selling.html">내 작물 무료나눔</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="MyPage.html">마이페이지</a></li>
-                </ul>
-            </div>
-            <div>
-                <address>
-                    <p>E-Mail :<a href="gksrlvy7138@gmail.com"> gksrlvy7138@gmail.com</a></p>
-                    <p>" 주소 : 서울시 서초구 서초대로74길 33 비트빌 3층"</p>
-                    <p>Tel :<a href="tel:+820234863456"> 02 - 3486 - 3456</a></p>
-                </address>
-            </div>
+            <ul>
+                <li>운영정보
+                    <ul>
+                        <li><a href="/Notification_info">질병정보</a></li>
+                        <li><a href="/operation_info">작물 농사 방법</a></li>
+                    </ul>
+                </li>
+                <li>분양정보
+                    <ul>
+                        <li><a href="/Sale_list">분양리스트</a></li>
+                    </ul>
+                </li>
+                <li>소통
+                    <ul>
+                        <li><a href="/bbs/list/standard">자유 게시판</a></li>
+                        <li><a href="/bbs/list/qna">질문</a></li>
+                        <li><a href="/bbs/list/notice">공지사항</a></li>
+                    </ul>
+                </li>
+                <li>공유
+                    <ul>
+                        <li><a href="/bbs/list/sell">내 작물 판매</a></li>
+                        <li><a href="/bbs/list/free">내 작물 무료나눔</a></li>
+                    </ul>
+                </li>
+                <li><a href="/MyPage">마이캘린더</a></li>
+            </ul>
         </div>
-    </footer>
+        <div>
+            <address>
+                <p>E-Mail :<a href="gksrlvy7138@gmail.com"> gksrlvy7138@gmail.com</a></p>
+                <p>" 주소 : 서울시 서초구 서초대로74길 33 비트빌 3층"</p>
+                <p>Tel :<a href="tel:+820234863456"> 02 - 3486 - 3456</a></p>
+            </address>
+        </div>
+    </div>
+</footer>
 <script type="text/javascript">
 var oEditors = [];
 

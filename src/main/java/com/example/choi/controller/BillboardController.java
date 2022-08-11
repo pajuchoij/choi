@@ -168,4 +168,21 @@ public class BillboardController {
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileDto.getOrigFilename() + "\"")
                 .body(resource);
     }
+
+    @GetMapping("/operation_info")
+    public String Operation_Info(){
+        return "board/operation_information";
+    }
+    // 작물질병정보 컨트롤러
+    @GetMapping("/Notification_info")
+    public String Notification_info(){
+        return "board/Notification_information";
+    }
+
+    @GetMapping("/Sale_list")
+    public String Sale_list(){
+        return "board/Sale_list3";
+    }
+    // 작물질병정보 컨트롤러
+
 }
