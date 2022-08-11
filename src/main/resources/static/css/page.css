@@ -1,12 +1,16 @@
-.MainV > div h2, .WeatherSection h2, .WeatherSection > div h3, .ParcelOut div:last-of-type p mark, .loginSection form fieldset h2,
+.MainV > div h2, .mainV h2, .WeatherSection h2, .WeatherSection > div h3, .ParcelOut div:last-of-type p mark, .loginSection form fieldset h2,
 .loginSection form fieldset > div input:last-of-type, .joinSection form h2, .MyPageS .calendar .content-left, .calendar .input-data, .calendar .input-box, .calendar .content-right thead tr td,
 #current-year-month, .MyPageS > div > div:nth-of-type(2) h3{
     font-family: 'Noto serif KR', serif;
 }
 
+
 @media screen and (max-width: 280px){
     .MyPageS .calendar .content-right table{
         width: 260px; margin: 0 auto;
+    }
+    .loginSection form fieldset > div{
+        max-width: 360px; width: 70%; list-style: none;
     }
 }
 
@@ -27,6 +31,7 @@
         width: 300px; margin: 0 auto;
     }
 }
+
 
 @media screen and (max-width: 699px) {
     .mainbackground{
@@ -53,7 +58,7 @@
         background: none; border: 1px solid #fff; padding: 10px 20px; color: #fff;
         font-size: 12px;
     }
-
+    
     .WeatherSection{
         max-width: 1279px; width: 100%; background: url(../images/main_weather_bg.png) no-repeat;
         text-align: center;
@@ -115,36 +120,36 @@
             left: 0;
             opacity: 0;
         }to{
-             left: 36.05%;
-             opacity: 1;
-         }
+            left: 36.05%;
+            opacity: 1;
+        }
     }
     @keyframes hobs2{
         from{
             left: 0;
             opacity: 0;
         }to{
-             left: 14.65%;
-             opacity: 1;
-         }
+            left: 14.65%;
+            opacity: 1;
+        }
     }
     @keyframes desappear1 {
         from{
             left: 45.05%;
             opacity: 1;
         }to{
-             left: -100px;
-             opacity: 0;
-         }
+            left: -100px;
+            opacity: 0;
+        }
     }
     @keyframes desappear2 {
         from{
             left: 18.65%;
             opacity: 1;
         }to{
-             left: -100px;
-             opacity: 0;
-         }
+            left: -100px;
+            opacity: 0;
+        }
     }
 
 
@@ -167,7 +172,7 @@
     }
     .ParcelOut div:last-of-type{
         display: flex; justify-content: center; align-items: center; position: relative;
-        margin-bottom: 180px;
+        margin-bottom: 180px; 
     }
     .ParcelOut div:last-of-type .parimg1{
         position: absolute; top: -50px; left: 0px; display: block; max-width: 50%;
@@ -186,36 +191,36 @@
             left: -100px;
             opacity: 0;
         }to{
-             left: 0;
-             opacity: 1;
-         }
+            left: 0;
+            opacity: 1;
+        }
     }
     @keyframes hobs4{
         from{
             right: -100px;
             opacity: 0;
         }to{
-             right: 0;
-             opacity: 1;
-         }
+            right: 0;
+            opacity: 1;
+        }
     }
     @keyframes desappear3 {
         from{
             left: 0;
             opacity: 1;
         }to{
-             left: -100px;
-             opacity: 0;
-         }
+            left: -100px;
+            opacity: 0;
+        }
     }
     @keyframes desappear4 {
         from{
             right: 0;
             opacity: 1;
         }to{
-             right: -100px;
-             opacity: 0;
-         }
+            right: -100px;
+            opacity: 0;
+        }
     }
 
     .ParcelOut div:last-of-type p{
@@ -243,15 +248,15 @@
     /*! Main Page fin */
 
     .loginSection{
-        max-width: 1279px; width: 100%; margin: 0 auto; background: url(../images/VG.jpg) no-repeat;
+        max-width: 1279px; width: 100%; margin: 0 auto; background: url(../images/VG.jpg) no-repeat; 
     }
     .loginSection form{
         background-color: rgba(0,0,0,0.4); width: 100%; height: 1079px;
         display: flex; justify-content: center; align-items: center;
     }
     .loginSection form fieldset{
-        margin: 0 auto; width: 97%; height: 640px; background: #FFEBD3;
-        border-radius: 20px;
+        margin: 0 auto; max-width: 280px; width: 100%; height: 640px; background: #FFEBD3;
+        border-radius: 20px; position: relative;
     }
     .loginSection form fieldset p{
         margin: 30px 0 10px; font-size: 25px; color: #627200;
@@ -262,12 +267,17 @@
         color: #627200; margin-bottom: 30px; text-align: center;
     }
     .loginSection form fieldset > div{
-        position: absolute; width: 74%; list-style: none; left: 12.8%;
+       max-width: 280px; width: 80%; list-style: none; position: absolute; left: 10%;
     }
-    .loginSection form fieldset > div input:first-of-type,
-    .loginSection form fieldset > div input:nth-of-type(2){
+    .loginSection form fieldset > div input{
         width: 100%; height: 50px; border-radius: 5px; box-sizing: border-box; box-shadow: 7px 7px 4px rgb(0 0 0 / 25%);
-        border: 1px solid #627200; margin-bottom: 10px; display: block; font-size: 20px;
+        border: 1px solid #627200; font-size: 20px;
+    }
+    .SECURITY-id{
+        margin-bottom: 20px; display: block; font-size: 10px; color: red;
+    }
+    .loginSection form fieldset > div input:first-of-type{
+        margin-bottom: 10px;
     }
     .loginSection form fieldset > div input:nth-of-type(3){
         margin-bottom: 30px;
@@ -282,7 +292,7 @@
     .loginSection form fieldset > div ul li button{
         width: 100%; line-height: 35px; background: #fff; text-align: center; font-size: 14px;
         border: none; cursor: pointer;
-    }
+    } 
     .loginSection form fieldset > div ul li:first-child button{
         border: 1px solid #628EFF; margin-bottom: 10px; color: #628EFF;
     }
@@ -302,13 +312,13 @@
         margin-left: 10px; border-left: 1px solid #627200; padding-left: 10px;
     }
     /*! Login Page fin */
-
+    
     .joinSection{
-        max-width: 1920px; width: 100%; display: flex; justify-content: center; align-items: center;
+        max-width: 1920px; width: 96%; display: flex; justify-content: center; align-items: center;
         margin: 0 auto;
     }
     .joinSection form{
-        width: 90%; margin: 75px 0 95px;
+        max-width: 490px; width: 90%; margin: 75px 0 95px;
     }
     .joinSection form p{
         font-size: 25px; text-align: center; margin-bottom: 20px;
@@ -320,12 +330,14 @@
         display: block; font-size: 15px; margin-bottom: 5px;
     }
     .joinSection form input{
-        margin-bottom: 10px; width: 100%; background: rgb(226, 226, 226); border: none; height: 40px;
+        width: 100%; background: rgb(226, 226, 226); border: none; height: 40px;
         box-sizing: border-box; box-shadow: 5px 5px 5px rgb(0 0 0 / 25%);
     }
-    .joinSection form input:first-of-type,
-    .joinSection form input:nth-of-type(6){
-        width: 69%;
+    .joinSection form .valid{
+        display: block; color: red;
+    }
+    .joinSection form .valid{
+        margin-bottom: 20px;
     }
     .joinSection form button:first-of-type{
         border: none; width: 30.5%; background: #627200; line-height: 38px; vertical-align: middle;
@@ -343,10 +355,10 @@
     }
     .joinSection form div button:last-of-type{
         border: none; width: 36%; background: #627200; line-height: 35px;
-        color: #fff; cursor: pointer; font-size: 15px; border-radius: 5px;
+        color: #fff; cursor: pointer; font-size: 15px; border-radius: 5px; 
     }
     /*! 회원가입 fin */
-
+    
     .opin_bg{
         background: url(../images/Op_infor.png) no-repeat; background-size: cover; height: 410px;
         text-indent: -9999px; margin-bottom: 95px;
@@ -380,7 +392,7 @@
         font-size: 20px; line-height: 30px; display: block; margin-top: 50px;
     }
     .accordionContainer > li{
-        cursor: pointer; position: relative;
+       cursor: pointer; position: relative;
     }
     .accordionContainer > li div:first-child{
         padding: 20px 30px 20px 0; color: black; font-size: 16px; border-top: 1px solid #627200;
@@ -479,7 +491,7 @@
         border-bottom: 1px solid #627200;
     }
     [class ^= 'tableSection'] table tbody tr td{
-        height: 68px; font-size: 10px; font-weight: normal; vertical-align: middle;
+       height: 68px; font-size: 10px; font-weight: normal; vertical-align: middle; 
     }
     [class ^= 'tableSection'] table tbody tr td:nth-of-type(2){
         width: 20%;
@@ -502,7 +514,7 @@
 
 
     /*! 자유게시판, 공지사항 fin */
-
+    
     [class ^= 'readpage']{
         max-width: 700px; width: 100%; margin: 0 auto;
     }
@@ -676,7 +688,7 @@
         box-sizing: border-box; font-size: 12px;
     }
     .writingS > div:nth-of-type(2) > div:first-of-type span{
-        margin-left: 1.5%; color: #a2a2a2; font-size: 10px;
+     margin-left: 1.5%; color: #a2a2a2; font-size: 10px;
     }
     /*! Writing Page fin*/
 
@@ -689,7 +701,7 @@
     .mapS::after{
         display: block; content: ''; visibility: hidden; clear: both;
     }
-
+    
     .mapS .mapslist ul li:hover{
         cursor: pointer;
     }
@@ -697,7 +709,7 @@
         height: 200px; border-bottom: 1px solid #000;
     }
     .mapS .mapbox{
-        width: 100%; height: 800px;
+        width: 100%; height: 800px; 
     }
     .mapS .mapslist{
         position: absolute; max-width: 400px; width: 100%; height: 700px; overflow-y: scroll; background: rgba(255,255,255, 0.7);
@@ -719,7 +731,7 @@
         border: none; background: none; font-size: 12px; box-sizing: border-box; cursor: pointer;
     }
     .modal{
-        max-width: 1920px; width: 100%; margin: 0 auto;
+        max-width: 1920px; width: 100%; margin: 0 auto; 
     }
     .modal{
         display: none;
@@ -767,7 +779,7 @@
         text-indent: -9999px;
     }
     .MyPageS > div{
-        max-width: 699px; width: 100%; margin-top: 40px;
+        max-width: 699px; width: 100%; margin-top: 40px; 
     }
     .MyPageS .calendar h3{
         font-size: 40px; margin-bottom: 30px;
@@ -783,7 +795,7 @@
     }
     .MyPageS .calendar .content-left{
         background: #0b0809; color:#FFEBD3; border-radius: 20px 20px 0 0;
-        height: 300px; padding: 60px 20px 20px 0;  overflow: auto;
+        height: 300px; padding: 60px 20px 20px 0;  overflow: auto; 
     }
     .MyPageS .calendar .Lnext, .calendar .Rnext,
     #next, #prev{
@@ -806,7 +818,7 @@
     }
     .MyPageS .calendar .input-box{
         width: 79%; height: auto; background: #0b0809; color: #FFEBD3; line-height : normal;
-        padding: .8em .5em 0 0; border: 0; border-bottom: 1px dashed #627200;;
+        padding: .8em .5em 0 0; border: 0; border-bottom: 1px dashed #627200;; 
         border-radius: 0; outline-style: none; -webkit-appearance: none; -moz-appearance: none; appearance: none;
     }
     .MyPageS .calendar .input-data{
@@ -841,7 +853,7 @@
     }
     .MyPageS .calendar .calendar-body tbody tr td{
         cursor: pointer; font-weight: bold;
-    }
+    } 
     .MyPageS .calendar tr td.active{
         background: #0b0809; border-radius: 50%; color: #ffffff;
     }
@@ -858,18 +870,18 @@
             right: -100px;
             opacity: 0;
         }to{
-             right:  100px;
-             opacity: 1;
-         }
+            right:  100px;
+            opacity: 1;
+        }
     }
     @keyframes slide2{
         from{
             right: -130px;
             opacity: 0;
         }to{
-             right:  130px;
-             opacity: 1;
-         }
+            right:  130px;
+            opacity: 1;
+        }
     }
 }
 
@@ -899,7 +911,7 @@
     .MainV > div a{
         background: none; border: 1px solid #fff; padding: 14px 49px; color: #fff;
     }
-
+    
     .WeatherSection{
         max-width: 1279px; width: 100%; background: url(../images/main_weather_bg.png) no-repeat;
         text-align: center;
@@ -961,36 +973,36 @@
             left: 0;
             opacity: 0;
         }to{
-             left: 45.05%;
-             opacity: 1;
-         }
+            left: 45.05%;
+            opacity: 1;
+        }
     }
     @keyframes hobs2{
         from{
             left: 0;
             opacity: 0;
         }to{
-             left: 18.65%;
-             opacity: 1;
-         }
+            left: 18.65%;
+            opacity: 1;
+        }
     }
     @keyframes desappear1 {
         from{
             left: 45.05%;
             opacity: 1;
         }to{
-             left: -100px;
-             opacity: 0;
-         }
+            left: -100px;
+            opacity: 0;
+        }
     }
     @keyframes desappear2 {
         from{
             left: 18.65%;
             opacity: 1;
         }to{
-             left: -100px;
-             opacity: 0;
-         }
+            left: -100px;
+            opacity: 0;
+        }
     }
 
 
@@ -1013,7 +1025,7 @@
     }
     .ParcelOut div:last-of-type{
         display: flex; justify-content: center; align-items: center; position: relative;
-        margin-bottom: 60px;
+        margin-bottom: 60px; 
     }
     .ParcelOut div:last-of-type .parimg1{
         position: absolute; top: -50px; left: 0px; display: block; max-width: 30%;
@@ -1032,36 +1044,36 @@
             left: -100px;
             opacity: 0;
         }to{
-             left: 0;
-             opacity: 1;
-         }
+            left: 0;
+            opacity: 1;
+        }
     }
     @keyframes hobs4{
         from{
             right: -100px;
             opacity: 0;
         }to{
-             right: 0;
-             opacity: 1;
-         }
+            right: 0;
+            opacity: 1;
+        }
     }
     @keyframes desappear3 {
         from{
             left: 0;
             opacity: 1;
         }to{
-             left: -100px;
-             opacity: 0;
-         }
+            left: -100px;
+            opacity: 0;
+        }
     }
     @keyframes desappear4 {
         from{
             right: 0;
             opacity: 1;
         }to{
-             right: -100px;
-             opacity: 0;
-         }
+            right: -100px;
+            opacity: 0;
+        }
     }
 
     .ParcelOut div:last-of-type p{
@@ -1089,14 +1101,14 @@
     /*! Main Page fin */
 
     .loginSection{
-        max-width: 1279px; width: 100%; margin: 0 auto; background: url(../images/VG.jpg) no-repeat;
+        max-width: 1279px; width: 100%; margin: 0 auto; background: url(../images/VG.jpg) no-repeat; 
     }
     .loginSection form{
         background-color: rgba(0,0,0,0.4); width: 100%; height: 1279px;
         display: flex; justify-content: center; align-items: center;
     }
     .loginSection form fieldset{
-        margin: 0 auto; width: 65%; height: 740px; background: #FFEBD3;
+        margin: 0 auto; max-width: 630px; width: 100%; height: 740px; background: #FFEBD3;
         border-radius: 20px;
     }
     .loginSection form fieldset p{
@@ -1108,12 +1120,17 @@
         color: #627200; margin-bottom: 30px; text-align: center;
     }
     .loginSection form fieldset > div{
-        position: absolute; width: 47%; list-style: none; left: 26.8%;
+        max-width: 460px; width: 100%; list-style: none; margin-left: 85px;
     }
-    .loginSection form fieldset > div input:first-of-type,
-    .loginSection form fieldset > div input:nth-of-type(2){
+    .loginSection form fieldset > div input{
         width: 100%; height: 50px; border-radius: 5px; box-sizing: border-box; box-shadow: 7px 7px 4px rgb(0 0 0 / 25%);
-        border: 1px solid #627200; margin-bottom: 10px; display: block; font-size: 20px;
+        border: 1px solid #627200; font-size: 20px;
+    }
+    .SECURITY-id{
+        margin-bottom: 20px; display: block; font-size: 12px; color: red;
+    }
+    .loginSection form fieldset > div input:first-of-type{
+        margin-bottom: 10px;
     }
     .loginSection form fieldset > div input:nth-of-type(3){
         margin-bottom: 30px;
@@ -1128,7 +1145,7 @@
     .loginSection form fieldset > div ul li button{
         width: 100%; line-height: 50px; background: #fff; text-align: center; font-size: 25px;
         border: none; cursor: pointer;
-    }
+    } 
     .loginSection form fieldset > div ul li:first-child button{
         border: 1px solid #628EFF; margin-bottom: 10px; color: #628EFF;
     }
@@ -1148,13 +1165,13 @@
         margin-left: 10px; border-left: 1px solid #627200; padding-left: 10px;
     }
     /*! Login Page fin */
-
+    
     .joinSection{
         max-width: 1920px; width: 100%; display: flex; justify-content: center; align-items: center;
         margin: 0 auto;
     }
     .joinSection form{
-        width: 40%; margin: 75px 0 95px;
+        max-width: 490px; width: 100%; margin: 75px 0 95px;
     }
     .joinSection form p{
         font-size: 30px; text-align: center; margin-bottom: 20px;
@@ -1166,12 +1183,14 @@
         display: block; font-size: 25px; margin-bottom: 5px;
     }
     .joinSection form input{
-        margin-bottom: 10px; width: 100%; background: rgb(226, 226, 226); border: none; height: 40px;
+        width: 100%; background: rgb(226, 226, 226); border: none; height: 40px;
         box-sizing: border-box; box-shadow: 5px 5px 5px rgb(0 0 0 / 25%);
     }
-    .joinSection form input:first-of-type,
-    .joinSection form input:nth-of-type(6){
-        width: 73%;
+    .joinSection form .valid{
+        display: block; color: red;
+    }
+    .joinSection form .valid{
+        margin-bottom: 20px;
     }
     .joinSection form button:first-of-type{
         border: none; width: 27%; background: #627200; line-height: 38px; vertical-align: middle;
@@ -1184,15 +1203,16 @@
     .joinSection form input:last-of-type{
         margin-bottom: 60px;
     }
+    
     .joinSection form div{
         text-align: center;
     }
     .joinSection form div button:last-of-type{
         border: none; width: 38%; background: #627200; line-height: 45px;
-        color: #fff; cursor: pointer; font-size: 20px; border-radius: 5px;
+        color: #fff; cursor: pointer; font-size: 20px; border-radius: 5px; 
     }
     /*! 회원가입 fin */
-
+    
     .opin_bg{
         background: url(../images/Op_infor.png) no-repeat; background-size: cover; height: 410px;
         text-indent: -9999px; margin-bottom: 95px;
@@ -1226,7 +1246,7 @@
         font-size: 20px; line-height: 30px; display: block; margin-top: 50px;
     }
     .accordionContainer > li{
-        cursor: pointer; position: relative;
+       cursor: pointer; position: relative;
     }
     .accordionContainer > li div:first-child{
         padding: 30px 0; color: black; font-size: 25px; border-top: 1px solid #627200;
@@ -1256,7 +1276,7 @@
         font-size: 30px; padding: 10px 2%; color: #FFEBD3;
     }
     .accordionContainer > li p mark{
-        background: none; font-weight: bold; font-style: normal;
+        background: none; font-weight: bold; font-style: normal; 
     }
     .accordionContainer > li > div:last-child ol{
         color: #FFEBD3; font-weight: bold; font-size: 20px;
@@ -1325,7 +1345,7 @@
         border-bottom: 1px solid #627200;
     }
     [class ^= 'tableSection'] table tbody tr td{
-        height: 80px; font-size: 15px; font-weight: normal; vertical-align: middle;
+        height: 80px; font-size: 15px; font-weight: normal; vertical-align: middle; 
     }
     [class ^= 'tableSection'] table tbody tr td:nth-of-type(2){
         width: 20%;
@@ -1345,7 +1365,7 @@
     }
 
     /*! 자유게시판, 공지사항 fin */
-
+    
     [class ^= 'readpage']{
         max-width: 1100px; width: 96%; margin: 0 auto;
     }
@@ -1519,7 +1539,7 @@
         box-sizing: border-box; font-size: 18px;
     }
     .writingS > div:nth-of-type(2) > div:first-of-type span{
-        margin-left: 1.5%; color: #a2a2a2; font-size: 13px;
+     margin-left: 1.5%; color: #a2a2a2; font-size: 13px;
     }
     /*! Writing Page fin*/
 
@@ -1532,7 +1552,7 @@
     .mapS::after{
         display: block; content: ''; visibility: hidden; clear: both;
     }
-
+    
     .mapS .mapslist ul li:hover{
         cursor: pointer;
     }
@@ -1540,7 +1560,7 @@
         height: 200px; border-bottom: 1px solid #000;
     }
     .mapS .mapbox{
-        width: 100%; height: 800px;
+        width: 100%; height: 800px; 
     }
     .mapS .mapslist{
         position: absolute; max-width: 400px; width: 100%; height: 700px; overflow-y: scroll; background: rgba(255,255,255, 0.7);
@@ -1562,7 +1582,7 @@
         border: none; background: none; font-size: 12px; box-sizing: border-box; cursor: pointer;
     }
     .modal{
-        max-width: 1920px; width: 100%; margin: 0 auto;
+        max-width: 1920px; width: 100%; margin: 0 auto; 
     }
     .modal{
         display: none;
@@ -1622,14 +1642,14 @@
         display: flex; align-items: center; justify-content: center; height: 100vh;
     }
     .MyPageS .calendar .content-wrap{
-        height: 600px; overflow: hidden;
+        height: 600px; overflow: hidden; 
     }
     .MyPageS .calendar .content-wrap::after{
         display: block; content: ''; visibility: hidden; clear: both;
     }
     .MyPageS .calendar .content-left{
         background: #0b0809; color:#FFEBD3; float: left; width: 320px; border-radius: 20px 0 0 20px;
-        height: 490px; padding: 90px 20px 20px 0;  overflow: auto;
+        height: 490px; padding: 90px 20px 20px 0;  overflow: auto; 
     }
     .MyPageS .calendar .Lnext, .calendar .Rnext,
     #next, #prev{
@@ -1652,7 +1672,7 @@
     }
     .MyPageS .calendar .input-box{
         width: 70%; height: auto; background: #0b0809; color: #FFEBD3; line-height : normal;
-        padding: .8em .5em 0 0; border: 0; border-bottom: 1px dashed #627200;;
+        padding: .8em .5em 0 0; border: 0; border-bottom: 1px dashed #627200;; 
         border-radius: 0; outline-style: none; -webkit-appearance: none; -moz-appearance: none; appearance: none;
     }
     .MyPageS .calendar .input-data{
@@ -1684,7 +1704,7 @@
     }
     .MyPageS .calendar .calendar-body tbody tr td{
         cursor: pointer; font-weight: bold;
-    }
+    } 
     .MyPageS .calendar tr td.active{
         background: #0b0809; border-radius: 50%; color: #ffffff;
     }
@@ -1701,18 +1721,18 @@
             right: -100px;
             opacity: 0;
         }to{
-             right:  100px;
-             opacity: 1;
-         }
+            right:  100px;
+            opacity: 1;
+        }
     }
     @keyframes slide2{
         from{
             right: -130px;
             opacity: 0;
         }to{
-             right:  130px;
-             opacity: 1;
-         }
+            right:  130px;
+            opacity: 1;
+        }
     }
 }
 
@@ -1733,8 +1753,7 @@
         text-align: center; margin-top: 17%; line-height: 100px;
     }
     .MainV > div h2{
-        font-size: 60px; font-weight: normal;
-        margin-bottom: 120px;
+        font-size: 60px; font-weight: normal; margin-bottom: 120px;
     }
     .MainV > div h2, .MainV > div p, .MainV > div button{
         color: #fff;
@@ -1742,7 +1761,7 @@
     .MainV > div a{
         background: none; border: 1px solid #fff; padding: 14px 49px; color: #fff;
     }
-
+    
     .WeatherSection{
         max-width: 1920px; width: 100%; background: url(../images/main_weather_bg.png) no-repeat;
         text-align: center;
@@ -1796,44 +1815,44 @@
         animation: hobs1 1.7s ease-in-out;
     }
     .hob div p{
-        font-size: 25px; color: #fff; line-height: 40px; width: 45%;
-        position: absolute; top: 210px;  left: 27.65%; animation: hobs2 1s ease-in-out;
+        font-size: 25px; color: #fff; line-height: 40px; width: 46%;
+        position: absolute; top: 210px;  left: 27.65%; animation: hobs2 1.s ease-in-out;
     }
     @keyframes hobs1{
         from{
             left: 0;
             opacity: 0;
         }to{
-             left: 45.05%;
-             opacity: 1;
-         }
+            left: 45.05%;
+            opacity: 1;
+        }
     }
     @keyframes hobs2{
         from{
             left: 0;
             opacity: 0;
         }to{
-             left: 27.65%;
-             opacity: 1;
-         }
+            left: 27.65%;
+            opacity: 1;
+        }
     }
     @keyframes desappear1 {
         from{
             left: 865px;
             opacity: 1;
         }to{
-             left: -100px;
-             opacity: 0;
-         }
+            left: -100px;
+            opacity: 0;
+        }
     }
     @keyframes desappear2 {
         from{
             left: 531px;
             opacity: 1;
         }to{
-             left: -100px;
-             opacity: 0;
-         }
+            left: -100px;
+            opacity: 0;
+        }
     }
 
 
@@ -1867,7 +1886,7 @@
     }
     .ParcelOut div:last-of-type .parimg2{
         position: absolute; top: -50px; right: 0; display: block; max-width: 100%;
-        animation: hobs4 2s ease-in-out;
+        animation: hobs4 2s ease-in-out; 
     }
 
     @keyframes hobs3{
@@ -1875,36 +1894,36 @@
             left: -100px;
             opacity: 0;
         }to{
-             left: 0;
-             opacity: 1;
-         }
+            left: 0;
+            opacity: 1;
+        }
     }
     @keyframes hobs4{
         from{
             right: -100px;
             opacity: 0;
         }to{
-             right: 0;
-             opacity: 1;
-         }
+            right: 0;
+            opacity: 1;
+        }
     }
     @keyframes desappear3 {
         from{
             left: 0;
             opacity: 1;
         }to{
-             left: -100px;
-             opacity: 0;
-         }
+            left: -100px;
+            opacity: 0;
+        }
     }
     @keyframes desappear4 {
         from{
             right: 0;
             opacity: 1;
         }to{
-             right: -100px;
-             opacity: 0;
-         }
+            right: -100px;
+            opacity: 0;
+        }
     }
 
     .ParcelOut div:last-of-type p{
@@ -1932,15 +1951,15 @@
     /*! Main Page fin */
 
     .loginSection{
-        max-width: 1920px; width: 100%; margin: 0 auto; background: url(../images/VG.jpg) no-repeat;
+        max-width: 1920px; width: 100%; margin: 0 auto; background: url(../images/VG.jpg) no-repeat; 
     }
     .loginSection form{
         background-color: rgba(0,0,0,0.4); width: 100%; height: 1279px;
         display: flex; justify-content: center; align-items: center;
     }
     .loginSection form fieldset{
-        margin: 0 auto; width: 33%; height: 740px; background: #FFEBD3;
-        border-radius: 20px;
+        margin: 0 auto; max-width: 630px; width: 100%; height: 740px; background: #FFEBD3;
+        border-radius: 20px; position: relative;
     }
     .loginSection form fieldset p{
         margin: 30px 0 10px; font-size: 30px; color: #627200;
@@ -1951,12 +1970,17 @@
         color: #627200; margin-bottom: 30px; text-align: center;
     }
     .loginSection form fieldset > div{
-        position: absolute; width: 20%; list-style: none; left: 39.8%;
+        position: absolute; max-width: 460px; width: 100%; list-style: none; margin-left: 85px;
     }
-    .loginSection form fieldset > div input:first-of-type,
-    .loginSection form fieldset > div input:nth-of-type(2){
+    .loginSection form fieldset > div input{
         width: 100%; height: 50px; border-radius: 5px; box-sizing: border-box; box-shadow: 7px 7px 4px rgb(0 0 0 / 25%);
-        border: 1px solid #627200; margin-bottom: 10px; display: block; font-size: 20px;
+        border: 1px solid #627200; font-size: 20px;
+    }
+    .SECURITY-id{
+        margin-bottom: 20px; display: block; font-size: 17px; color: red;
+    }
+    .loginSection form fieldset > div input:first-of-type{
+        margin-bottom: 10px;
     }
     .loginSection form fieldset > div input:nth-of-type(3){
         margin-bottom: 30px;
@@ -1971,7 +1995,7 @@
     .loginSection form fieldset > div ul li button{
         width: 100%; line-height: 50px; background: #fff; text-align: center; font-size: 25px;
         border: none; cursor: pointer;
-    }
+    } 
     .loginSection form fieldset > div ul li:first-child button{
         border: 1px solid #628EFF; margin-bottom: 10px; color: #628EFF;
     }
@@ -1991,13 +2015,13 @@
         margin-left: 10px; border-left: 1px solid #627200; padding-left: 10px;
     }
     /*! Login Page fin */
-
+    
     .joinSection{
         max-width: 1920px; width: 100%; display: flex; justify-content: center; align-items: center;
         margin: 0 auto;
     }
     .joinSection form{
-        width: 26%; margin: 75px 0 95px;
+        max-width: 490px; width: 100%; margin: 75px 0 95px;
     }
     .joinSection form p{
         font-size: 30px; text-align: center; margin-bottom: 20px;
@@ -2009,12 +2033,14 @@
         display: block; font-size: 25px; margin-bottom: 5px;
     }
     .joinSection form input{
-        margin-bottom: 10px; width: 100%; background: rgb(226, 226, 226); border: none; height: 40px;
+        width: 100%; background: rgb(226, 226, 226); border: none; height: 40px;
         box-sizing: border-box; box-shadow: 5px 5px 5px rgb(0 0 0 / 25%);
     }
-    .joinSection form input:first-of-type,
-    .joinSection form input:nth-of-type(6){
-        width: 75%;
+    .joinSection form .valid{
+        display: block; color: red;
+    }
+    .joinSection form .valid{
+        margin-bottom: 20px;
     }
     .joinSection form button:first-of-type{
         border: none; width: 25%; background: #627200; line-height: 38px; vertical-align: middle;
@@ -2027,20 +2053,24 @@
     .joinSection form input:last-of-type{
         margin-bottom: 60px;
     }
-    .joinSection form span{
+    .joinSection form div{
         text-align: center;
     }
     .joinSection form div button:last-of-type{
         border: none; width: 30%; background: #627200; line-height: 45px;
-        color: #fff; cursor: pointer; font-size: 20px; border-radius: 5px;
+        color: #fff; cursor: pointer; font-size: 20px; border-radius: 5px; 
     }
     /*! 회원가입 fin */
-
+    
     .opin_bg{
         background: url(../images/Op_infor.png) no-repeat; background-size: cover; height: 410px;
         text-indent: -9999px; margin-bottom: 95px;
     }
     .operationS{
+        max-width: 1440px; width: 96%; margin: 95px auto; 
+        
+    }
+    .operationS2{
         max-width: 1440px; width: 96%; margin: 95px auto; text-align: center;
         background: url(../images/appT_bg.png); background-size: cover; height: 886px;
     }
@@ -2050,28 +2080,28 @@
     [id ^='OStab'].active{
         display: block;
     }
-    .operationS h2{
+    [class ^='operationS'] h2{
         font-size: 60px; margin-bottom: 60px;
     }
-    .operationS > p{
+    [class ^='operationS'] > p{
         font-size: 40px; margin-bottom: 10px;
     }
-    .operationS .select_img_td div img{
+    [class ^='operationS'] .select_img_td div img{
         max-width: 700px; width: 100%;height: 400px; margin: 50px 0; display: block;
     }
-    .operationS table{
+    [class ^='operationS'] table{
         display: flex; align-items: center; justify-content: center;
     }
-    .operationS table thead tr td div #attachFile{
+    [class ^='operationS'] table thead tr td div #attachFile{
         border: none; background: none;
     }
-    .operationS .lasttd{
+    [class ^='operationS'] .lasttd{
         font-size: 20px; line-height: 30px; display: block; margin-top: 50px;
     }
 
 
     .accordionContainer > li{
-        cursor: pointer; position: relative;
+       cursor: pointer; position: relative;
     }
     .accordionContainer > li div:first-child{
         padding: 30px 0; color: black; font-size: 25px; border-top: 1px solid #627200;
@@ -2142,7 +2172,7 @@
         width: 100%;
     }
     .tableSection table tbody tr span{
-        font-size: 13px; background: #FFC2C2; color: #FE0000;
+        font-size: 13px; background: #FFC2C2; color: #FE0000; 
         width: 55px; line-height: 25px; position: absolute; padding: 0 5px;
     }
     .tableSection table tbody tr th:first-child{
@@ -2167,7 +2197,7 @@
         border-bottom: 1px solid #627200;
     }
     [class ^= 'tableSection'] table tbody tr td{
-        line-height: 76px; font-size: 20px; font-weight: normal;
+       line-height: 76px; font-size: 20px; font-weight: normal;
     }
     [class ^= 'tableSection'] table tbody tr td:not(:first-of-type){
         text-align: center;
@@ -2184,7 +2214,7 @@
     }
 
     /*! 자유게시판, 공지사항 fin */
-
+    
     [class ^= 'readpage']{
         max-width: 1100px; width: 100%; margin: 0 auto;
     }
@@ -2358,7 +2388,7 @@
         box-sizing: border-box; font-size: 18px;
     }
     .writingS > div:nth-of-type(2) > div:first-of-type span{
-        margin-left: 1.5%; color: #a2a2a2;
+     margin-left: 1.5%; color: #a2a2a2;
     }
     /*! Writing Page fin*/
 
@@ -2371,7 +2401,7 @@
     .mapS::after{
         display: block; content: ''; visibility: hidden; clear: both;
     }
-
+    
     .mapS .mapslist ul li:hover{
         cursor: pointer;
     }
@@ -2379,7 +2409,7 @@
         height: 200px; border-bottom: 1px solid #000;
     }
     .mapS .mapbox{
-        width: 100%; height: 800px;
+        width: 100%; height: 800px; 
     }
     .mapS .mapslist{
         position: absolute; max-width: 400px; width: 100%; height: 700px; overflow-y: scroll; background: rgba(255,255,255, 0.7);
@@ -2401,7 +2431,7 @@
         border: none; background: none; font-size: 12px; box-sizing: border-box; cursor: pointer;
     }
     .modal{
-        max-width: 1920px; width: 100%; margin: 0 auto;
+        max-width: 1920px; width: 100%; margin: 0 auto; 
     }
     .modal{
         display: none;
@@ -2465,11 +2495,11 @@
         display: flex; align-items: center; justify-content: center; height: 100vh;
     }
     .MyPageS .calendar .content-wrap{
-        height: 600px; overflow: hidden;
+        height: 600px; overflow: hidden; 
     }
     .MyPageS .calendar .content-left{
         background: #0b0809; color:#FFEBD3; float: left; width: 360px; border-radius: 20px 0 0 20px;
-        height: 490px; padding: 90px 20px 20px 0;  overflow: auto;
+        height: 490px; padding: 90px 20px 20px 0;  overflow: auto; 
     }
     .MyPageS .calendar .Lnext, .calendar .Rnext,
     #next, #prev{
@@ -2492,7 +2522,7 @@
     }
     .MyPageS .calendar .input-box{
         width: 70%; height: auto; background: #0b0809; color: #FFEBD3; line-height : normal;
-        padding: .8em .5em 0 0; border: 0; border-bottom: 1px dashed #627200;;
+        padding: .8em .5em 0 0; border: 0; border-bottom: 1px dashed #627200;; 
         border-radius: 0; outline-style: none; -webkit-appearance: none; -moz-appearance: none; appearance: none;
     }
     .MyPageS .calendar .input-data{
@@ -2524,7 +2554,7 @@
     }
     .MyPageS .calendar .calendar-body tbody tr td{
         cursor: pointer; font-weight: bold;
-    }
+    } 
     .MyPageS .calendar tr td.active{
         background: #0b0809; border-radius: 50%; color: #ffffff;
     }
@@ -2553,18 +2583,18 @@
             right: -100px;
             opacity: 0;
         }to{
-             right:  100px;
-             opacity: 1;
-         }
+            right:  100px;
+            opacity: 1;
+        }
     }
     @keyframes slide2{
         from{
             right: -130px;
             opacity: 0;
         }to{
-             right:  130px;
-             opacity: 1;
-         }
+            right:  130px;
+            opacity: 1;
+        }
     }
 }
 

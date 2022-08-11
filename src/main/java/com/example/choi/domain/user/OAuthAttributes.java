@@ -95,7 +95,7 @@ public class OAuthAttributes {
         .name(name)
         .email(email)
         .picture(picture)
-        .role(Role.GUEST)
+        .role(Role.USER)
         //가입할때 기본원한을 GUEST
         .build();
     }
