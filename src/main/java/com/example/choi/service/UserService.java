@@ -60,6 +60,7 @@ public class UserService implements UserDetailsService {
 
     }
 
+
     //중복 검사 
     public int checkId(String s_id){
         Optional<UserInfo> findUsers = userRepository.findByUserid(s_id);

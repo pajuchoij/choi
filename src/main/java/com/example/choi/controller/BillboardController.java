@@ -1,15 +1,24 @@
 package com.example.choi.controller;
-
+import com.example.choi.domain.entity.UserInfo;
+import com.example.choi.domain.repository.UserRepository;
 import com.example.choi.dto.BillboardDto;
 import com.example.choi.dto.FileDto;
 import com.example.choi.service.BillboardService;
 import com.example.choi.service.FileService;
+import com.example.choi.service.UserService;
 import com.example.choi.util.MD5Generator;
+
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -20,22 +29,35 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class BillboardController {
     private BillboardService billboardService;
     private FileService fileService;
 
-    public BillboardController(BillboardService billboardService, FileService fileService) {
+    private UserService userService;
+
+    private final HttpSession httpSession;
+    private final UserRepository userRepository;
+
+
+
+    public BillboardController(BillboardService billboardService, FileService fileService, HttpSession httpSession, UserRepository userRepository) {
         this.billboardService = billboardService;
         this.fileService = fileService;
+        this.httpSession = httpSession;
+        this.userRepository = userRepository;
     }
 
     @GetMapping("/bbs/list/{bbstype}") //게시판 리스트 이동
     public String list(@PathVariable("bbstype") String bbstype,Model model) {
         List<BillboardDto> billboardDtoList = billboardService.getBillboardList(bbstype);
         model.addAttribute("postList", billboardDtoList);
+        model.addAttribute("bbstype", bbstype);
         return "billboard/boardlist";
     }
 
@@ -44,9 +66,37 @@ public class BillboardController {
         return "billboard/boardwrite";
     }
 
-    @PostMapping("bbs/post")  // 게시물 저장
+    @PostMapping("bbs/post" )  // 게시물 저장
     public String write(@RequestParam("file") MultipartFile files, BillboardDto billboardDto) {
-            String bbstype = billboardDto.getBbstype();
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        //auth..getDetails()
+        String userNick = "";
+        String userid = "";
+
+        String userRole = String.valueOf(auth.getAuthorities());
+        if(auth instanceof UsernamePasswordAuthenticationToken) {
+            Object oUser = auth.getPrincipal();
+            userNick = ((UserInfo)oUser).getNickname();
+            userid = ((UserInfo)oUser).getUserid();
+        }
+        else if(auth instanceof OAuth2AuthenticationToken) {
+            OAuth2User oAuth2User = (OAuth2User) auth.getPrincipal();
+            Map<String, Object> attributes = (Map<String, Object>) oAuth2User.getAttributes();
+            Map<String, Object> lhm = (LinkedHashMap)attributes.get("properties");
+            if(lhm == null){
+                userNick = (String) attributes.get("name");
+            }else {
+                userNick = (String) lhm.get("nickname");
+            }
+            userid = oAuth2User.getName();
+        }
+        else {
+            return "/login";
+        }
+        billboardDto.setUserid(userid);
+        billboardDto.setUsername(userNick);
+        String bbstype = billboardDto.getBbstype();
         try {
             String origFilename = files.getOriginalFilename();
             String filename = new MD5Generator(origFilename).toString();

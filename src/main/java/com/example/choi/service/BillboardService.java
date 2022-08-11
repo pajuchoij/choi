@@ -3,6 +3,7 @@ package com.example.choi.service;
 import com.example.choi.domain.entity.Billboard;
 import com.example.choi.domain.repository.BillboardRepository;
 import com.example.choi.dto.BillboardDto;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -32,7 +33,8 @@ public class BillboardService {
 
     @Transactional
     public List<BillboardDto> getBillboardList(String bbstype) {
-        List<Billboard> billboardList = billboardRepository.findAllByBbstype(bbstype);
+        Sort sort = Sort.by(Sort.Direction.DESC,"modifiedDate");
+        List<Billboard> billboardList = billboardRepository.findAllByBbstype(bbstype, sort);
         List<BillboardDto> billboardDtoList = new ArrayList<>();
 
         for(Billboard billboard : billboardList) {

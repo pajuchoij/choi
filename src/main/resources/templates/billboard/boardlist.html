@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,7 +15,7 @@
 </head>
 <body>
 <header class="ColorH">
-    <h1><a href="index.html"><img src="/images/Color_Logo.png" alt=""></a></h1>
+    <h1><a href="/"><img src="/images/Color_Logo.png" alt=""></a></h1>
     <nav>
         <button type="button" class="bobile">
             <span></span>
@@ -35,27 +36,33 @@
             </li>
             <li>소통
                 <ul>
-                    <li><a href="/boardList/standard">자유 게시판</a></li>
-                    <li><a href="/boardList/qna">질문</a></li>
-                    <li><a href="/boardList/Notice">공지사항</a></li>
+                    <li><a href="/bbs/list/standard">자유 게시판</a></li>
+                    <li><a href="/bbs/list/qna">질문</a></li>
+                    <li><a href="/bbs/list/notice">공지사항</a></li>
                 </ul>
             </li>
             <li>공유
                 <ul>
-                    <li><a href="/boardList/sell">내 작물 판매</a></li>
-                    <li><a href="/boardList/free">내 작물 무료나눔</a></li>
+                    <li><a href="/bbs/list/sell">내 작물 판매</a></li>
+                    <li><a href="/bbs/list/free">내 작물 무료나눔</a></li>
                 </ul>
             </li>
-            <li><a href="MyPage.html">마이페이지</a></li>
+            <li><a href="/MyPage">마이페이지</a></li>
         </ul>
     </nav>
-    <span class="login"><a href="login.html">로그인</a></span>
-</header>
-<script> alert(location); </script>
-    <div class="gong">gong</div>
+    <span sec:authorize="isAnonymous()" ><a href="/login">로그인</a></span>
 
+    <form id="logout" action="/logout" method="POST">
+            <span sec:authorize="isAuthenticated()">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                <!-- <span sec:authentication="name" ><a>님 환영합니다!</a></span>  ~~님 환영합니다! 가 안나옵니다 -->
+                <span class="logout"><a href="/logout" type="submit">로그아웃</a></span>
+            </span>
+    </form>
+</header>
+    <div class="gong">gong</div>
     <section class="tableSection">
-        <h2>작물 판매</h2>
+        <h2 id="bbsname"></h2>
         <div id="Qtab1" class="inventory1 tabPg active">
             <table>
                 <tbody>
@@ -93,7 +100,25 @@
             <li class="tabBtn active" data-tab="Qtab1">1</li>
         </ol>
     </div>
+<script>
+    var strName = "";
+    var strType = "[[${bbstype}]]".toString().toLowerCase();
 
+    switch(strType){
+        case "standard" :strName = "자유 게시판";
+            break;
+        case "qna" :strName = "질문 게시판";
+            break;
+        case "sell" :strName = "내 작물 판매 게시판";
+            break;
+        case "free" :strName = "무료나눔 게시판";
+            break;
+        case "notice" :strName = "공지사항";
+            break;
+        default : strName = ""; }
+
+    $("#bbsname").text(strName);
+</script>
     <footer>
         <div>
             <h1><a href="../../../../../../../../Last_Dance-main/Last_Dance-main/index.html">My Little Farm</a></h1>
