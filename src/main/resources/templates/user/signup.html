@@ -12,10 +12,43 @@
     <script src="/js/jquery-3.6.0.min.js"></script>
     <script src="/js/header.js"></script>
     <script src="/js/weather.js"></script>
+    <script type="text/javascript">
+        $(function (){
+            $("input[name='userid']").on("keyup",function (){
+                var s_id = $('#userid').val();
+                console.log("s_id : "+s_id);
+
+                // ajax 호출
+                $.ajax({
+                    data : {s_id : s_id},
+                    url : "IdChek",
+                    data_type : "json",
+                    success : function (data) {
+                        console.log(data);
+                        if(data == '0'){
+
+                            console.log("사용가능한 아이디 입니다")
+
+                            $("#IdCheck").text("사용가능한 아이디 입니다!");
+                        } else if (data == "1") {
+
+                            console.log("이미 사용중인 아이디 입니다")
+
+                            $("#IdCheck").text("이미 사용중인 아이디 입니다!");
+                        }
+                    },
+                    error : function (error) {
+                        console.log(error);
+                        alert("error :" + error);
+                    }
+                });
+            });
+        });
+    </script>
 </head>
 <body>
-<header class="NoneColor-Header">
-    <h1><a href="/"><img src="/images/main_Logo.png" alt="my little farm"></a></h1>
+    <header class="ColorH">
+    <h1><a href="/"><img src="/images/Color_Logo.png" alt=""></a></h1>
     <nav>
         <button type="button" class="bobile">
             <span></span>
@@ -47,10 +80,18 @@
                     <li><a href="/bbs/list/free">내 작물 무료나눔</a></li>
                 </ul>
             </li>
-            <li><a href="/MyPage">마이캘린더</a></li>
+            <li><a href="/MyPage">마이캘린더</a>
+                <ul>
+                    <li sec:authorize="isAnonymous()" class="login" ><a href="/login">로그인</a></li>
+                    <form id="login" action="/logout" method="POST">
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                        <li sec:authorize="isAuthenticated()" class="login"><a href="/logout" type="submit">로그아웃</a></li>
+                    </form>
+                </ul>
+            </li>
         </ul>
     </nav>
-    <span sec:authorize="isAnonymous()" ><a href="/login">로그인</a></span>
+    <span sec:authorize="isAnonymous()" class="login"><a href="/login">로그인</a></span>
 
     <form id="logout" action="/logout" method="POST">
             <span sec:authorize="isAuthenticated()">
@@ -59,7 +100,6 @@
                 <span class="logout"><a href="/logout" type="submit">로그아웃</a></span>
             </span>
     </form>
-
 </header>
 
     <section class="joinSection">
@@ -107,45 +147,54 @@
     </section>
 
     <footer>
+    <div>
+        <h1><a href="/">My Little Farm</a></h1>
         <div>
-            <h1><a href="/">My Little Farm</a></h1>
-            <div>
-                <ul>
-                    <li>운영정보
-                        <ul>
-                            <li><a href="/Notification_info">질병정보</a></li>
-                            <li><a href="/operation_info">작물 농사 방법</a></li>
-                        </ul>
-                    </li>
-                    <li>분양정보
-                        <ul>
-                            <li><a href="/Sale_list">분양리스트</a></li>
-                        </ul>
-                    </li>
-                    <li>소통
-                        <ul>
-                            <li><a href="/bbs/list/standard">자유 게시판</a></li>
-                            <li><a href="/bbs/list/qna">질문</a></li>
-                            <li><a href="/bbs/list/notice">공지사항</a></li>
-                        </ul>
-                    </li>
-                    <li>공유
-                        <ul>
-                            <li><a href="/bbs/list/sell">내 작물 판매</a></li>
-                            <li><a href="/bbs/list/free">내 작물 무료나눔</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="/MyPage">마이캘린더</a></li>
-                </ul>
-            </div>
-            <div>
-                <address>
-                    <p>E-Mail :<a href="gksrlvy7138@gmail.com"> gksrlvy7138@gmail.com</a></p>
-                    <p>" 주소 : 서울시 서초구 서초대로74길 33 비트빌 3층"</p>
-                    <p>Tel :<a href="tel:+820234863456"> 02 - 3486 - 3456</a></p>
-                </address>
-            </div>
+            <ul>
+                <li>운영정보
+                    <ul>
+                        <li><a href="/Notification_info">질병정보</a></li>
+                        <li><a href="/operation_info">작물 농사 방법</a></li>
+                    </ul>
+                </li>
+                <li>분양정보
+                    <ul>
+                        <li><a href="/Sale_list">분양리스트</a></li>
+                    </ul>
+                </li>
+                <li>소통
+                    <ul>
+                        <li><a href="/bbs/list/standard">자유 게시판</a></li>
+                        <li><a href="/bbs/list/qna">질문</a></li>
+                        <li><a href="/bbs/list/notice">공지사항</a></li>
+                    </ul>
+                </li>
+                <li>공유
+                    <ul>
+                        <li><a href="/bbs/list/sell">내 작물 판매</a></li>
+                        <li><a href="/bbs/list/free">내 작물 무료나눔</a></li>
+                    </ul>
+                </li>
+                <li><a href="/MyPage">마이캘린더</a>
+                    <ul>
+                        <li sec:authorize="isAnonymous()" class="login" ><a href="/login">로그인</a></li>
+
+                        <form id="login" action="/logout" method="POST">
+                            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                            <li sec:authorize="isAuthenticated()" class="login"><a href="/logout" type="submit">로그아웃</a></li>
+                        </form>
+                    </ul>
+                </li>
+            </ul>
         </div>
-    </footer>
+        <div>
+            <address>
+                <p>E-Mail :<a href="gksrlvy7138@gmail.com"> gksrlvy7138@gmail.com</a></p>
+                <p>" 주소 : 서울시 서초구 서초대로74길 33 비트빌 3층"</p>
+                <p>Tel :<a href="tel:+820234863456"> 02 - 3486 - 3456</a></p>
+            </address>
+        </div>
+    </div>
+</footer>
 </body>
 </html>

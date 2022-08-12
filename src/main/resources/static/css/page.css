@@ -275,6 +275,9 @@
     .loginSection form fieldset > div label{
         vertical-align: none;
     }
+    .loginSection form fieldset .SECURITY-id{
+        color: red;
+    }
     .loginSection form fieldset > div input:last-of-type{
         display: block; width: 100%; height: 45px; color: #fff;
         font-size: 20px; background-color: #627200; border: none; cursor: pointer; margin-bottom: 40px;
@@ -320,13 +323,12 @@
         display: block; font-size: 15px; margin-bottom: 5px;
     }
     .joinSection form input{
-        margin-bottom: 10px; width: 100%; background: rgb(226, 226, 226); border: none; height: 40px;
+        margin-bottom: 5px; width: 100%; background: rgb(226, 226, 226); border: none; height: 35px;
         box-sizing: border-box; box-shadow: 5px 5px 5px rgb(0 0 0 / 25%);
     }
-    .joinSection form input:first-of-type,
-    .joinSection form input:nth-of-type(6){
-        width: 69%;
-    }
+    .joinSection .valid{
+         margin-bottom: 15px; color: red; display: block;
+     }
     .joinSection form button:first-of-type{
         border: none; width: 30.5%; background: #627200; line-height: 38px; vertical-align: middle;
         color: #fff; margin-left: -3px; cursor: pointer; font-size: 12px; box-shadow: 5px 5px 5px rgb(0 0 0 / 25%);
@@ -351,8 +353,11 @@
         background: url(../images/Op_infor.png) no-repeat; background-size: cover; height: 80px;
         text-indent: -9999px; margin-bottom: 40px;
     }
+    [class ^='operation']{
+        max-width: 1440px; width: 96%; margin: 0 auto;
+    }
     .operationS{
-        max-width: 699px; width: 96%; margin: 0 auto; padding: 0 2%;
+        margin: 95px auto; text-align: center; height: 886px;
     }
     [id ^='OStab']{
         display: none;
@@ -360,11 +365,17 @@
     [id ^='OStab'].active{
         display: block;
     }
-    .operationS h2{
-        font-size: 30px; margin-bottom: 30px;
+    [class ^='operation'] h2{
+        font-size: 40px; margin-bottom: 60px;
     }
-    .operationS > p{
-        font-size: 20px; margin-bottom: 10px;
+    [class ^='operation'] > p{
+        font-size: 25px; margin-bottom: 30px;
+    }
+    .operationS table{
+        display: flex; align-items: center; justify-content: center;
+    }
+    .operationS .select_img_td div img{
+        max-width: 700px; width: 100%; height: 400px; margin: 50px 0; display: block;
     }
     .accordionContainer > li{
        cursor: pointer; position: relative;
@@ -491,7 +502,7 @@
     /*! 자유게시판, 공지사항 fin */
     
     [class ^= 'readpage']{
-        max-width: 700px; width: 100%; margin: 0 auto;
+        max-width: 700px; width: 96%; margin: 0 auto;
     }
     [class ^= 'readpage'] h2{
         text-indent: -9999px;
@@ -614,8 +625,8 @@
         text-align: right; margin-bottom: 60px;
     }
     .readpage1 > div:nth-of-type(3) button{
-        border: none; background: #627200; width: 7.72%; height: 40px;
-        font-size: 15px; border-radius: 7px; color: #fff;
+        border: none; background: #627200; width: 11.72%; height: 40px;
+        font-size: 12px; border-radius: 7px; color: #fff;
     }
     .readpage1 > div:nth-of-type(3) button a{
         color: #fff;
@@ -1108,6 +1119,9 @@
     .loginSection form fieldset > div label{
         vertical-align: none;
     }
+    .loginSection form fieldset .SECURITY-id{
+        color: red;
+    }
     .loginSection form fieldset > div input:last-of-type{
         display: block; width: 100%; height: 45px; color: #fff;
         font-size: 30px; background-color: #627200; border: none; cursor: pointer; margin-bottom: 75px;
@@ -1153,12 +1167,11 @@
         display: block; font-size: 25px; margin-bottom: 5px;
     }
     .joinSection form input{
-        margin-bottom: 10px; width: 100%; background: rgb(226, 226, 226); border: none; height: 40px;
+        margin-bottom: 5px; width: 100%; background: rgb(226, 226, 226); border: none; height: 35px;
         box-sizing: border-box; box-shadow: 5px 5px 5px rgb(0 0 0 / 25%);
     }
-    .joinSection form input:first-of-type,
-    .joinSection form input:nth-of-type(6){
-        width: 73%;
+    .joinSection .valid{
+        margin-bottom: 15px; color: red; display: block;
     }
     .joinSection form button:first-of-type{
         border: none; width: 27%; background: #627200; line-height: 38px; vertical-align: middle;
@@ -1179,13 +1192,16 @@
         color: #fff; cursor: pointer; font-size: 20px; border-radius: 5px; 
     }
     /*! 회원가입 fin */
-    
+
     .opin_bg{
-        background: url(../images/Op_infor.png) no-repeat; background-size: cover; height: 410px;
+        background: url(../images/Op_infor.png) no-repeat; background-size: cover; height: 248px;
         text-indent: -9999px; margin-bottom: 95px;
     }
+    [class ^='operation']{
+        max-width: 1440px; width: 96%; margin: 0 auto;
+    }
     .operationS{
-        max-width: 1280px; width: 96%; margin: 0 auto;
+        margin: 95px auto; text-align: center; height: 886px;
     }
     [id ^='OStab']{
         display: none;
@@ -1193,11 +1209,17 @@
     [id ^='OStab'].active{
         display: block;
     }
-    .operationS h2{
+    [class ^='operation'] h2{
         font-size: 60px; margin-bottom: 60px;
     }
-    .operationS > p{
-        font-size: 40px; margin-bottom: 10px;
+    [class ^='operation'] > p{
+        font-size: 40px; margin-bottom: 30px;
+    }
+    .operationS table{
+        display: flex; align-items: center; justify-content: center;
+    }
+    .operationS .select_img_td div img{
+        max-width: 700px; width: 100%; height: 400px; margin: 50px 0; display: block;
     }
     .accordionContainer > li{
        cursor: pointer; position: relative;
@@ -1445,7 +1467,7 @@
     }
     .readpage1 > div:nth-of-type(3) button{
         border: none; background: #627200; width: 7.72%; height: 40px;
-        font-size: 15px; border-radius: 7px; color: #fff;
+        font-size: 12px; border-radius: 7px; color: #fff;
     }
     .readpage1 > div:nth-of-type(3) button a{
         color: #fff;
@@ -1770,7 +1792,7 @@
         animation: hobs1 1.7s ease-in-out;
     }
     .hob div p{
-        font-size: 25px; color: #fff; line-height: 40px; width: 45%;
+        font-size: 20px; color: #fff; line-height: 40px; width: 45%;
         position: absolute; top: 210px;  left: 27.65%; animation: hobs2 1.s ease-in-out;
     }
     @keyframes hobs1{
@@ -1938,6 +1960,9 @@
     .loginSection form fieldset > div label{
         vertical-align: none;
     }
+    .loginSection form fieldset .SECURITY-id{
+        color: red;
+    }
     .loginSection form fieldset > div input:last-of-type{
         display: block; width: 100%; height: 45px; color: #fff;
         font-size: 30px; background-color: #627200; border: none; cursor: pointer; margin-bottom: 75px;
@@ -1986,9 +2011,8 @@
         margin-bottom: 10px; width: 100%; background: rgb(226, 226, 226); border: none; height: 40px;
         box-sizing: border-box; box-shadow: 5px 5px 5px rgb(0 0 0 / 25%);
     }
-    .joinSection form input:first-of-type,
-    .joinSection form input:nth-of-type(6){
-        width: 75%;
+    .joinSection .valid{
+        margin-bottom: 15px; color: red; display: block;
     }
     .joinSection form button:first-of-type{
         border: none; width: 25%; background: #627200; line-height: 38px; vertical-align: middle;
@@ -2014,8 +2038,11 @@
         background: url(../images/Op_infor.png) no-repeat; background-size: cover; height: 410px;
         text-indent: -9999px; margin-bottom: 95px;
     }
-    .operationS{
+    [class ^='operation']{
         max-width: 1440px; width: 96%; margin: 0 auto;
+    }
+    .operationS{
+        margin: 95px auto; text-align: center; background: url("../images/appT_bg.png") no-repeat; background-size: cover; height: 886px;
     }
     [id ^='OStab']{
         display: none;
@@ -2023,12 +2050,19 @@
     [id ^='OStab'].active{
         display: block;
     }
-    .operationS h2{
+    [class ^='operation'] h2{
         font-size: 60px; margin-bottom: 60px;
     }
-    .operationS > p{
-        font-size: 40px; margin-bottom: 10px;
+    [class ^='operation'] > p{
+        font-size: 40px; margin-bottom: 30px;
     }
+    .operationS table{
+        display: flex; align-items: center; justify-content: center;
+    }
+    .operationS .select_img_td div img{
+        max-width: 700px; width: 100%; height: 400px; margin: 50px 0; display: block;
+    }
+
     .accordionContainer > li{
        cursor: pointer; position: relative;
     }

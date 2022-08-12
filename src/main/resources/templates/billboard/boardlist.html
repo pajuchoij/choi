@@ -47,10 +47,18 @@
                     <li><a href="/bbs/list/free">내 작물 무료나눔</a></li>
                 </ul>
             </li>
-            <li><a href="/MyPage">마이캘린더</a></li>
+            <li><a href="/MyPage">마이캘린더</a>
+                <ul>
+                    <li sec:authorize="isAnonymous()" class="login" ><a href="/login">로그인</a></li>
+                    <form id="login" action="/logout" method="POST">
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                        <li sec:authorize="isAuthenticated()" class="login"><a href="/logout" type="submit">로그아웃</a></li>
+                    </form>
+                </ul>
+            </li>
         </ul>
     </nav>
-    <span sec:authorize="isAnonymous()" ><a href="/login">로그인</a></span>
+    <span sec:authorize="isAnonymous()" class="login"><a href="/login">로그인</a></span>
 
     <form id="logout" action="/logout" method="POST">
             <span sec:authorize="isAuthenticated()">
@@ -74,7 +82,7 @@
                     </tr>
                     <tr th:each="post : ${postList}">
                         <td>
-                            <a th:href="@{'/bbs/post/' + ${post.id}}" th:text="${post.title}">
+                            <a th:href="@{'/bbs/view/' + ${post.id}}" th:text="${post.title}">
                             </a>
                         </td>
                         <td th:text="${post.username}">
@@ -91,7 +99,7 @@
             </table>
         </div>
         <div>
-            <button><a href="/bbs/post">글쓰기</a></button>
+            <button><a th:href="@{'/bbs/post/'+ ${bbstype}}">글쓰기</a></button>
         </div>
     </section>
     

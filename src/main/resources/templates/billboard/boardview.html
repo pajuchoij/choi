@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      >
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,11 +11,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="/js/jquery-3.6.0.min.js"></script>
     <script src="/js/header.js"></script>
-    <script src="/js/weather.js"></script>
+    
 </head>
 <body>
-<header class="NoneColor-Header">
-    <h1><a href="/"><img src="/images/main_Logo.png" alt="my little farm"></a></h1>
+<header class="ColorH">
+    <h1><a href="/"><img src="/images/Color_Logo.png" alt=""></a></h1>
     <nav>
         <button type="button" class="bobile">
             <span></span>
@@ -47,10 +47,18 @@
                     <li><a href="/bbs/list/free">내 작물 무료나눔</a></li>
                 </ul>
             </li>
-            <li><a href="/MyPage">마이캘린더</a></li>
+            <li><a href="/MyPage">마이캘린더</a>
+                <ul>
+                    <li sec:authorize="isAnonymous()" class="login" ><a href="/login">로그인</a></li>
+                    <form id="login" action="/logout" method="POST">
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                        <li sec:authorize="isAuthenticated()" class="login"><a href="/logout" type="submit">로그아웃</a></li>
+                    </form>
+                </ul>
+            </li>
         </ul>
     </nav>
-    <span sec:authorize="isAnonymous()" ><a href="/login">로그인</a></span>
+    <span sec:authorize="isAnonymous()" class="login"><a href="/login">로그인</a></span>
 
     <form id="logout" action="/logout" method="POST">
             <span sec:authorize="isAuthenticated()">
@@ -59,9 +67,7 @@
                 <span class="logout"><a href="/logout" type="submit">로그아웃</a></span>
             </span>
     </form>
-
 </header>
-
 
     <div class="comubg">comuBG</div>
         
@@ -83,48 +89,41 @@
                 ></small>
             </div>
             <div>
-                <textarea type="text" th:text="${post.content}" style=" width: 100%; height: 620px;"></textarea>
+                <textarea type="text" th:text="${post.content}" style=" width: 100%; height: 620px;" readonly></textarea>
+            </div>
+            <div th:if="${post.fileId != null}">
+                <strong>첨부파일 : </strong>
+                <a
+                        class="card-text"
+                        th:href="@{'/download/' + ${post.fileId}}"
+                        th:text="${filename}"
+                ></a>
             </div>
         </div>
 
         <div>
-            <button><a th:href="@{'/bbs/modify/' + ${post.id}}">글 수정</a></button>
-            <button><a th:href="@{'/bbs/post-del/' + ${post.id}}">삭제</a></button>
+            <button id="editbtn"><a th:href="@{'/bbs/modify/' + ${post.id}}">글 수정</a></button>
+            <button id="delbtn"><a th:href="@{'/bbs/post-del/' + ${post.id}}">삭제</a></button>
         </div>
 
-        <form class="CommentForm">
-            <div>
-                <h3>댓글</h3> <span class="active">등록순</span> <span>최신순</span> <span>신고</span>
-            </div>
-            <input type="text" name="" id="" placeholder="로그인 후 이용해 주세요."><button>댓글 등록</button>
-            <ul>
-                <li>
-                    <h4>왜그러고사냐</h4>
-                    <p>형 사랑해 ♡ 공지필독할게 ♡</p>
-                    <time>2022-04-26</time>
-                </li>
-                <li>
-                    <h4>왜그러고사냐</h4>
-                    <p>형 사랑해 ♡ 공지필독할게 ♡</p>
-                    <time>2022-04-26</time>
-                </li>
-                <li>
-                    <h4>왜그러고사냐</h4>
-                    <p>형 사랑해 ♡ 공지필독할게 ♡</p>
-                    <time>2022-04-26</time>
-                </li>
-                <li>
-                    <h4>왜그러고사냐</h4>
-                    <p>형 사랑해 ♡ 공지필독할게 ♡</p>
-                    <time>2022-04-26</time>
-                </li>
-                <li>
-                    <h4>왜그러고사냐</h4>
-                    <p>형 사랑해 ♡ 공지필독할게 ♡</p>
-                    <time>2022-04-26</time>
-                </li>
-            </ul>
-        </form>
+        <!-- 라이브리 시티 설치 코드 -->
+        <div id="lv-container" data-id="city" data-uid="MTAyMC81NjY4Ny8zMzE1MQ==">
+            <script type="text/javascript">
+                (function(d, s) {
+                    var j, e = d.getElementsByTagName(s)[0];
+
+                    if (typeof LivereTower === 'function') { return; }
+
+                    j = d.createElement(s);
+                    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                    j.async = true;
+
+                    e.parentNode.insertBefore(j, e);
+                })(document, 'script');
+            </script>
+            <noscript>라이브리 댓글 작성을 위해 JavaScript를 활성화 해주세요</noscript>
+        </div>
+        <!-- 시티 설치 코드 끝 -->
         <div class="paging">
             <ol>
                 <li class="tabBtn active" data-tab="Qtab1">1</li>
@@ -150,6 +149,10 @@
     //document.getElementById("toList").herf = "/bbs/list/"+strType;
     $("#bbsname").text(strName);
     $("#toList").attr('href', "/bbs/list/"+strType);
+    $("#editbtn").attr('style',"[[${usreq}]]");
+    $("#delbtn").attr('style',"[[${usreq}]]");
+
+
 </script>
 <footer>
     <div>

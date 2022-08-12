@@ -5,12 +5,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
-    <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
-    <title>마이페이지</title>
+    <title>분양 리스트</title>
     <link rel="icon" type="images/png" sizes="32x32" href="/images/favicon-32x32.png">
     <link rel="stylesheet" href="/css/import.css">
     <script src="/js/jquery-3.6.0.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="/js/header.js"></script>
 </head>
 
@@ -48,10 +49,18 @@
                         <li><a href="/bbs/list/free">내 작물 무료나눔</a></li>
                     </ul>
                 </li>
-                <li><a href="/MyPage">마이캘린더</a></li>
+                <li><a href="/MyPage">마이캘린더</a>
+                    <ul>
+                        <li sec:authorize="isAnonymous()" class="login" ><a href="/login">로그인</a></li>
+                        <form id="login" action="/logout" method="POST">
+                            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                            <li sec:authorize="isAuthenticated()" class="login"><a href="/logout" type="submit">로그아웃</a></li>
+                        </form>
+                    </ul>
+                </li>
             </ul>
         </nav>
-        <span sec:authorize="isAnonymous()" ><a href="/login">로그인</a></span>
+        <span sec:authorize="isAnonymous()" class="login"><a href="/login">로그인</a></span>
 
         <form id="logout" action="/logout" method="POST">
             <span sec:authorize="isAuthenticated()">
@@ -108,7 +117,7 @@
         </div>
     </section>
 
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=28421dfec276c9cf96871dabc9d7c067&libraries=services"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0a975679ecfeebf2de59d0bf803a6260&libraries=services"></script>
 
     <script>
         var results,    //전체 데이터 저장을 위함
@@ -152,18 +161,12 @@
                         console.log(results[idx].LO);
                         console.log(result[0].address_name);
                         console.log(result[0].x);
-                        //console.log(result);
-
                         results[idx].LO = result[0].x;
                         results[idx].LA = result[0].y;
-
                         resolve();
                     }
-                
                 })
-
-
-            })    
+            })
         }
 
 
@@ -171,15 +174,11 @@
             $.each(results, function (index, val) {  
                 //console.log(results[index].LA);
 
-                (async () => {  
-
-                //console.log(results[index].RDNMADR);
+                (async () => {
                 await addressSearch(index,results[index].RDNMADR);
-
                 })(); 
             })
         }
-
 
         //전체 데이터 동기식으로 읽어오기
         $.ajax({
@@ -191,20 +190,10 @@
                 //console.log('Received data:', data.vNtcnNgc002.row)
                 results = data.vNtcnNgc002.row; //전체 분양 정보 전역변수 등록 
                 //console.log(results[1].LA);
-
-
                 //kakao API를 이용해서 위도,경도를 업데이드 함
                 changeXY ();
-                
-
             }, error: {}
         })
-
-
-
-
-
-
         function setSaleList(strSearch) {
 
             console.log("setSaleList start");
@@ -218,102 +207,21 @@
                     //console.log("setSaleList start each");
                     if ((val.SJ.includes(strSearch)) || (val.ATDRC_CODE.includes(strSearch))) {
 
-                    //} || (val.RDNMADR.includes(strSearch))) {
-                    
                         tmp += "<li onclick='map_load(" + i + ");'> " + val.SJ;
                         tmp += " <br> <span>주소 : </span> " + val.RDNMADR + "<br><span>이용대상 자치구 : </span>" + val.REQST_TRGET_CODE + " </li>"
                         tmp += " </ul></div>";
                         
                         arrSalelist.push([val.ATDRC_CODE, val.SJ, val.LA, val.LO, val.REFRNC, val.RDNMADR, val.CN]);//지역구, 제목, 위도, 경도
-
-                        //console.log("i" + i);
-                       // console.log("setSaleList before async " + val.RDNMADR);
-/*                         (async () => {
-
-                            //console.log(val.RDNMADR);
-                            const result = await addressSearch(val.RDNMADR);
-                            console.log(result[i].x);
-                            console.log(result[i].y);
-                            //console.log("i" + i);
-                            arrSalelist.push([val.ATDRC_CODE, val.SJ, result[i].x, result[i].y, val.REFRNC, val.RDNMADR, val.CN]);//지역구, 제목, 위도, 경도
-                            //console.log(arrSalelist.length);
-                            //console.log(arrSalelist.length);
-                            
-                        })();
-
-                        if (i = 100) map_load(0); */
-                        //console.log("setSaleList after async ");
-                        //console.log("주소 : " + val.RDNMADR);
-                        //geocoder.addressSearch(val.RDNMADR, callback);
-                       //var total = results.length;
-                       //console.log("total" + total);
- /*                        geocoder.addressSearch(val.RDNMADR,function(result, status)  {
-
-                            //console.log("arrSalelist : " + arrSalelist.length);
-                            console.log("status" + status);
-                            if (status === kakao.maps.services.Status.OK) {
-                                //console.log("geocoder");
-                                //arrSalelist.push([val.ATDRC_CODE, val.SJ, val.LA, val.LO, val.REFRNC, val.RDNMADR, val.CN]);//지역구, 제목, 위도, 경도
-                                arrSalelist.push([val.ATDRC_CODE, val.SJ, result[0].x, result[0].y, val.REFRNC, val.RDNMADR, val.CN]);//지역구, 제목, 위도, 경도
-                                //console.log("i : " + i);
-                            }
-                             
-
-                        }) */
-                        //console.log(i);
-                        //console.log(arrSalelist.length);
-                        
-                    // console.log(val.RDNMADR + xTemp + yTemp );
-
-                        //arrSalelist.push([val.ATDRC_CODE, val.SJ, val.LA, val.LO, val.REFRNC, val.RDNMADR, val.CN]);//지역구, 제목, 위도, 경도
-
-                        //arrSalelist.push([val.ATDRC_CODE, val.SJ, xyInfo.x, xyInfo.y, val.REFRNC, val.RDNMADR, val.CN]);//지역구, 제목, 위도, 경도
-
                         i++; //
-
-
                     } 
-                   // console.log("total" + total);
-                   // console.log("i" + i);
-                   // console.log("arrSalelist" + arrSalelist.length);
-
                 });
 
-  /*               console.log("arrSalelist" + arrSalelist.length);
-
-                (async () => {
-
-                   // console.log(results[0].RDNMADR);
-                    const result = await addressSearch(arrSalelist[0].RDNMADR);
-                    console.log(result);
-                    //console.log("i" + i);
-                    arrSalelist.push([results[0].ATDRC_CODE, results[0].SJ, result[0].x, result[0].y, results[0].REFRNC, results[0].RDNMADR, results[0].CN]);//지역구, 제목, 위도, 경도
-                    //console.log(arrSalelist.length);
-                    //console.log(arrSalelist.length);
-                    map_load(0);
-                })(); */
-
-                    
                // console.log("arrSalelist : " + arrSalelist.length);
                 $("#placesList").html(tmp);
                 map_load(0);
 
-            
-           //map_load(0); //지도에 리스트 상위 항목 위치 넣기 SJH
-           // })
-
-        } 
-
-        
-       // setSaleList(strSearch);
-
-        //geocoder.addressSearch('해남군 송지면', callback);
-            
-
+        }
         setSaleList(strSearch); // 분양 정보 검색 리스트 항목
-        
-     
-        //console.log("xTemp " + xTemp);
 
         //리스트를 가져온 후 위치값 넣기 
         function map_load(i) {
@@ -326,10 +234,6 @@
             var strREFRNC = arrSalelist[i][4];
             var strRDNMADR = arrSalelist[i][5];
             var strCN = arrSalelist[i][6];
-
-            //console.log("strTitle" + strTitle);
-            //console.log("strla" + strla);
-            //console.log("strlo" + strlo);
             var markerPosition = new kakao.maps.LatLng(strla, strlo);
             // 마커를 생성합니다
             marker = new kakao.maps.Marker({
@@ -404,34 +308,9 @@
             $(".modal-body").html(strbody);//.replaceAll("\&lt\g","<").replaceAll("\&rt\g",">");//append(arrSalelist[idx][6]);
         //    $(".modal-body").style.
         }
-            
-        // $(document).ready(function(){
-        //     var Detail='';
-        //     $('#modal_btn').click(function(){
-        //         Detail = $(this).val();
-        //         console.log(Detail);
-        //         alert(results);
-        //     });
-
-        //     function showList(data){
-        //         var CNList = '';
-        //         $(".modal-body").empty();
-        //         var head = '<span>'+Detail+'</span>';
-        //         $(".modal-body").append(head);
-        //         $.each(data, function(index,item){
-        //             CNList = '<tr>';
-        // 			CNList += '<td>' + item.CN + '</td>';
-        // 			CNList += '</tr>';
-        //             $(".modal-body").append(CNList); // tmp = CNList
-        //         })
-        //     }
-        // });
-
-
- 
 
     </script>
-    <script src="../../../../../../Last_Dance/js/modal.js"></script>
+    <script src="/js/modal.js"></script>
 
     <footer>
         <div>

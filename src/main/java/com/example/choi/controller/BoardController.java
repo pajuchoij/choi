@@ -83,7 +83,12 @@ public class BoardController {
     @GetMapping("/post/{id}")
     public String detail(@PathVariable("id") Long id, Model model) {
         BoardDto boardDto = boardService.getPost(id);
+        if(boardDto.getFileId()!=null){
+            FileDto fileDto = fileService.getFile(boardDto.getFileId());
+            model.addAttribute("filename", fileDto.getFilename());
+        }
         model.addAttribute("post", boardDto);
+
         return "board/detail";
     }
 

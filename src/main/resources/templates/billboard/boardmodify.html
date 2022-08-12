@@ -14,8 +14,8 @@
     <script src="/js/weather.js"></script>
 </head>
 <body>
-<header class="NoneColor-Header">
-    <h1><a href="/"><img src="/images/main_Logo.png" alt="my little farm"></a></h1>
+<header class="ColorH">
+    <h1><a href="/"><img src="/images/Color_Logo.png" alt=""></a></h1>
     <nav>
         <button type="button" class="bobile">
             <span></span>
@@ -47,10 +47,18 @@
                     <li><a href="/bbs/list/free">내 작물 무료나눔</a></li>
                 </ul>
             </li>
-            <li><a href="/MyPage">마이캘린더</a></li>
+            <li><a href="/MyPage">마이캘린더</a>
+                <ul>
+                    <li sec:authorize="isAnonymous()" class="login" ><a href="/login">로그인</a></li>
+                    <form id="login" action="/logout" method="POST">
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                        <li sec:authorize="isAuthenticated()" class="login"><a href="/logout" type="submit">로그아웃</a></li>
+                    </form>
+                </ul>
+            </li>
         </ul>
     </nav>
-    <span sec:authorize="isAnonymous()" ><a href="/login">로그인</a></span>
+    <span sec:authorize="isAnonymous()" class="login"><a href="/login">로그인</a></span>
 
     <form id="logout" action="/logout" method="POST">
             <span sec:authorize="isAuthenticated()">
@@ -59,7 +67,6 @@
                 <span class="logout"><a href="/logout" type="submit">로그아웃</a></span>
             </span>
     </form>
-
 </header>
 
 	<div class="gong">gong</div>

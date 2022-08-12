@@ -39,8 +39,6 @@ public class BillboardController {
     private BillboardService billboardService;
     private FileService fileService;
 
-    private UserService userService;
-
     private final HttpSession httpSession;
     private final UserRepository userRepository;
 
@@ -56,13 +54,16 @@ public class BillboardController {
     @GetMapping("/bbs/list/{bbstype}") //게시판 리스트 이동
     public String list(@PathVariable("bbstype") String bbstype,Model model) {
         List<BillboardDto> billboardDtoList = billboardService.getBillboardList(bbstype);
+
         model.addAttribute("postList", billboardDtoList);
         model.addAttribute("bbstype", bbstype);
+
         return "billboard/boardlist";
     }
 
-    @GetMapping("bbs/post")  //작성페이지 이동
-    public String post() {
+    @GetMapping("bbs/post/{bbstype}")  //작성페이지 이동
+    public String post(@PathVariable("bbstype") String strType, Model model) {
+        model.addAttribute("bbstype",strType);
         return "billboard/boardwrite";
     }
 
@@ -99,28 +100,30 @@ public class BillboardController {
         String bbstype = billboardDto.getBbstype();
         try {
             String origFilename = files.getOriginalFilename();
-            String filename = new MD5Generator(origFilename).toString();
-            /* 실행되는 위치의 'files' 폴더에 파일이 저장됩니다. */
-            String savePath = System.getProperty("user.dir") + "\\files";
-            /* 파일이 저장되는 폴더가 없으면 폴더를 생성합니다. */
-            if (!new File(savePath).exists()) {
-                try{
-                    new File(savePath).mkdir();
+            if(origFilename != ""){
+                String filename = new MD5Generator(origFilename).toString();
+                /* 실행되는 위치의 'files' 폴더에 파일이 저장됩니다. */
+                String savePath = System.getProperty("user.dir") + "\\files";
+                /* 파일이 저장되는 폴더가 없으면 폴더를 생성합니다. */
+                if (!new File(savePath).exists()) {
+                    try{
+                        new File(savePath).mkdir();
+                    }
+                    catch(Exception e){
+                        e.getStackTrace();
+                    }
                 }
-                catch(Exception e){
-                    e.getStackTrace();
-                }
+                String filePath = savePath + "\\" + filename;
+                files.transferTo(new File(filePath));
+
+                FileDto fileDto = new FileDto();
+                fileDto.setOrigFilename(origFilename);
+                fileDto.setFilename(filename);
+                fileDto.setFilePath(filePath);
+
+                Long fileId = fileService.saveFile(fileDto);
+                billboardDto.setFileId(fileId);
             }
-            String filePath = savePath + "\\" + filename;
-            files.transferTo(new File(filePath));
-
-            FileDto fileDto = new FileDto();
-            fileDto.setOrigFilename(origFilename);
-            fileDto.setFilename(filename);
-            fileDto.setFilePath(filePath);
-
-            Long fileId = fileService.saveFile(fileDto);
-            billboardDto.setFileId(fileId);
             billboardService.savePost(billboardDto);
 
         } catch(Exception e) {
@@ -129,11 +132,27 @@ public class BillboardController {
         return "redirect:/bbs/list/"+bbstype;
     }
 
-    @GetMapping("bbs/post/{id}") // 게시물 상세보기
+    @GetMapping("bbs/view/{id}") // 게시물 상세보기
     public String detail(@PathVariable("id") Long id, Model model) {
         BillboardDto billboardDto = billboardService.getPost(id);
+        if (billboardDto.getModifiedDate() == null) {
+
+        }
+        if(billboardDto.getFileId() != null) {
+            FileDto fileDto = fileService.getFile(billboardDto.getFileId());
+            model.addAttribute("filename", fileDto.getOrigFilename());
+        }
         model.addAttribute("post", billboardDto);
         billboardService.updateView(id); // views ++
+
+        String usrid = SecurityContextHolder.getContext().getAuthentication().getName().toString();
+
+        if(billboardDto.getUserid().equals(usrid))
+        {
+            model.addAttribute("usreq", "" );
+        }else {
+            model.addAttribute("usreq", "display:none" );
+        }
 
         return "billboard/boardview";
     }

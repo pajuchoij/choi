@@ -65,6 +65,7 @@ public class BillboardService {
                 .readcnt(billboard.getReadcnt())
                 .bbstype(billboard.getBbstype())
                 .createdDate(billboard.getCreatedDate())
+                .modifiedDate(billboard.getModifiedDate())
                 .build();
         return billboardDto;
     }

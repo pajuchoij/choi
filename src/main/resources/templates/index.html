@@ -13,10 +13,11 @@
     <script src="/js/jquery-3.6.0.min.js"></script>
     <script src="/js/calendar.js" defer></script>
     <script src="/js/header.js"></script>
+    <script src="/js/weather.js"></script>
 </head>
 <body>
-<header class="ColorH">
-    <h1><a href="/"><img src="/images/Color_Logo.png" alt=""></a></h1>
+<header class="NoneColor-Header">
+    <h1><a href="/"><img src="/images/main_Logo.png" alt="my little farm"></a></h1>
     <nav>
         <button type="button" class="bobile">
             <span></span>
@@ -48,15 +49,15 @@
                     <li><a href="/bbs/list/free">내 작물 무료나눔</a></li>
                 </ul>
             </li>
-            <li><a href="/MyPage">마이페이지</a></li>
+            <li><a href="/MyPage">마이캘린지</a></li>
         </ul>
     </nav>
-    <span sec:authorize="isAnonymous()" class="login" ><a href="/login">로그인</a></span>
+    <span sec:authorize="isAnonymous()" class="login"><a href="/login">로그인</a></span>
     <form id="logout" action="/logout" method="POST">
             <span sec:authorize="isAuthenticated()">
                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                 <!-- <span sec:authentication="name" ><a>님 환영합니다!</a></span>  ~~님 환영합니다! 가 안나옵니다 -->
-                <span class="login"><a href="/logout" type="submit">로그아웃</a></span>
+                <span class="logout"><a href="/logout" type="submit">로그아웃</a></span>
             </span>
     </form>
 </header>
@@ -80,9 +81,8 @@
 
     <section class="WeatherSection">
         <h2>WEATHER</h2>
-        <div id="showWeatherForcast">
-        </div>
-            <img src="/images/ccccccc.png" alt="">
+        <div id="showWeatherForcast"></div>
+        <img src="/images/ccccccc.png" alt="">
     </section>
 
     <section class="hob">
@@ -142,7 +142,16 @@
                             <li><a href="/bbs/list/free">내 작물 무료나눔</a></li>
                         </ul>
                     </li>
-                    <li><a href="/MyPage">마이캘린더</a></li>
+                    <li><a href="/MyPage">마이캘린더</a>
+                        <ul>
+                            <li sec:authorize="isAnonymous()" class="login" ><a href="/login">로그인</a></li>
+
+                            <form id="login" action="/logout" method="POST">
+                                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                                <li sec:authorize="isAuthenticated()" class="login"><a href="/logout" type="submit">로그아웃</a></li>
+                            </form>
+                        </ul>
+                    </li>
                 </ul>
             </div>
             <div>
