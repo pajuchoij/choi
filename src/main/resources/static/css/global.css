@@ -83,7 +83,7 @@ ul{
 
     .NoneColor-Header .gnb,
     .ColorH .gnb{
-        position: fixed; left:100%; width:100%; padding: 90px 0 600px; text-align: center;
+        position: fixed; left:100%; width:100%; padding: 60px 0 600px; text-align: center;
         background: rgba(78,90,0,.95); transition-duration: 0.4s; top: 0; z-index: 2;
     }
     .NoneColor-Header .gnb.on,
@@ -96,7 +96,7 @@ ul{
     }
     .NoneColor-Header .gnb > li > a,
     .ColorH .gnb > li > a{
-        padding: 20px; display:inline-block; font-size: 20px; color: #fff;
+        display:inline-block; font-size: 20px; color: #fff;
     }
     
     .NoneColor-Header .gnb li ul a,
@@ -113,13 +113,13 @@ ul{
         margin-top: 40px; display: block; padding-top: 6px;
     }
     header span a{
-        line-height: 44px; margin-left: 34%; font-size: 15px; font-weight: bold; display: none;
+        line-height: 44px; margin-left: 65%; font-size: 15px; font-weight: bold; display: none;
     }
     .NoneColor-Header span a{
-        color: #fff;
+        color: #fff; width: 12%;
     }
     .ColorH span a{
-        color: #627200;
+        color: #627200; width: 12%;
     } 
     /*! header */
 
@@ -334,10 +334,10 @@ ul{
         line-height: 55px; margin-left: 66%; font-size: 20px; font-weight: bold;
     }
     .NoneColor-Header span a{
-        color: #fff;
+        color: #fff; width: 12%;
     }
     .ColorH span a{
-        color: #627200;
+        color: #627200; width: 12%;
     } 
     /*! header */
 

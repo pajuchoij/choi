@@ -104,44 +104,46 @@
 
     <section class="joinSection">
         <form th:action="@{/user}" method="POST" modelattribute="infoDto">
-            <p>회원가입</p>
-            <h2>MY LITTLE FARM</h2>
+            <fieldset>
+                <p>회원가입</p>
+                <h2>MY LITTLE FARM</h2>
 
-            <label for=>아이디</label>
-            <input type="text" name="userid" id="userid" placeholder="(필수)아이디를 입력해 주세요" /> <br>
-            <span class="valid" th:text="${valid_userid}"></span>
-            <span id="IdCheck" class="valid"></span>
+                <label for=>아이디</label>
+                <input type="text" name="userid" id="userid" placeholder="(필수)아이디를 입력해 주세요" /> <br>
+                <span class="valid" th:text="${valid_userid}"></span>
+                <span id="IdCheck" class="valid"></span>
 
-            <label for=>비밀번호</label>
-            <input type="password" name="password" placeholder="(필수)비밀번호를 입력해 주세요"> <br>
-            <span class="valid" th:text="${valid_password}"></span>
+                <label for=>비밀번호</label>
+                <input type="password" name="password" placeholder="(필수)비밀번호를 입력해 주세요"> <br>
+                <span class="valid" th:text="${valid_password}"></span>
 
-            <label for=>닉네임</label>
-            <input type="text" name="nickname" placeholder="(필수)닉네임을 입력해 주세요"> <br>
-            <span class="valid" th:text="${valid_nickname}"></span>
+                <label for=>닉네임</label>
+                <input type="text" name="nickname" placeholder="(필수)닉네임을 입력해 주세요"> <br>
+                <span class="valid" th:text="${valid_nickname}"></span>
 
-            <label for=>이름</label>
-            <input type="text" name="name" placeholder="(필수)이름을 입력해 주세요"> <br>
-            <span class="valid" th:text="${valid_name}"></span>
+                <label for=>이름</label>
+                <input type="text" name="name" placeholder="(필수)이름을 입력해 주세요"> <br>
+                <span class="valid" th:text="${valid_name}"></span>
 
-            <label for=>E-mail</label>
-            <input type="text" name="email"  placeholder="(필수)이메일을 입력해 주세요"> <br>
-            <span class="valid" th:text="${valid_email}"></span>
+                <label for=>E-mail</label>
+                <input type="text" name="email"  placeholder="(필수)이메일을 입력해 주세요"> <br>
+                <span class="valid" th:text="${valid_email}"></span>
 
-            <label for=>전화번호</label>
-            <input type="tel" name="tel"placeholder=" (필수) ex) 010-1234-5678"> <br>
-            <span class="valid" th:text="${valid_tel}"> <br> </span>
+                <label for=>전화번호</label>
+                <input type="tel" name="tel"placeholder=" (필수) ex) 010-1234-5678"> <br>
+                <span class="valid" th:text="${valid_tel}"> <br> </span>
 
-            <label for=>주소</label>
-            <input type="text" name="address" placeholder="주소를 입력해 주세요"> <br>
-            <span class="valid" th:text="${valid_address}"> <br> </span>
+                <label for=>주소</label>
+                <input type="text" name="address" placeholder="주소를 입력해 주세요"> <br>
+                <span class="valid" th:text="${valid_address}"> <br> </span>
 
-           <!-- <input type="radio" name="auth" value="ROLE_ADMIN,ROLE_USER"> admin -->
-            <input type="hidden" name="auth" value="ROLE_USER" checked="checked"> <br>
+                <!-- <input type="radio" name="auth" value="ROLE_ADMIN,ROLE_USER"> admin -->
+                <input type="hidden" name="auth" value="ROLE_USER" checked="checked"> <br>
             
-            <div class="signup-btn">
-                <button type="submit">가입 하기</button>
-            </div>
+                <div class="signup-btn">
+                    <button type="submit">가입 하기</button>
+                </div>
+            </fieldset>
         </form>
         <div class="joinbgimg"></div>
     </section>
