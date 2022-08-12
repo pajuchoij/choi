@@ -31,7 +31,7 @@ public class Billboard {
     @Column(length = 100, nullable = false)
     private String title;
 
-    @Column(length = 10, nullable = false)
+    @Column(length = 20, nullable = false)
     private String bbstype;
 
     @Column(columnDefinition = "TEXT", nullable = false)

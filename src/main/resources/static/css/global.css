@@ -233,6 +233,14 @@ ul{
     footer > div div:last-of-type address p a{
         color: #FFEBD3;
     }
+    header .mlogin a{
+        display: block;
+    }
+    .mlogin1 {
+        display: block;
+        text-align: center;
+        align-content: center;
+    }
 
 }
 
@@ -328,10 +336,10 @@ ul{
 
 
     header .login{
-        margin-top: 40px; display: block; padding-top: 6px;
+        margin-top: 40px; display: inline-block; padding-top: 6px;
     }
     header span a{
-        line-height: 55px; margin-left: 66%; font-size: 20px; font-weight: bold;
+        line-height: 55px; margin-left: 66%; font-size: 20px; font-weight: bold; display: none;
     }
     .NoneColor-Header span a{
         color: #fff; width: 12%;
@@ -451,7 +459,13 @@ ul{
     footer > div div:last-of-type address p a{
         color: #FFEBD3;
     }
-
+    header .mlogin a{
+        display: block;
+    }
+    .mlogin1 {
+        display: block;align-content: center;
+        text-align: center;
+    }
 }
 /* ? tablet */
 
@@ -637,5 +651,11 @@ ul{
     footer > div div:last-of-type address p a{
         color: #FFEBD3;
     }
-
+    header .mlogin a{
+        display: none;
+    }
+    .mlogin1 {
+        display: none;
+        text-align: center;
+    }
 }

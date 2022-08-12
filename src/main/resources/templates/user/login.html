@@ -11,7 +11,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="/js/jquery-3.6.0.min.js"></script>
     <script src="/js/header.js"></script>
-    <script src="/js/weather.js"></script>
+
 </head>
 <body>
 <header class="NoneColor-Header">
@@ -23,10 +23,13 @@
             <span></span>
         </button>
         <ul class="gnb clear">
+            <li sec:authorize="isAnonymous()" class="mlogin"><a  href="/login">| 로그인 |</a><a href="/signup">| 회원가입 |</a></li>
+            <li sec:authorize="isAuthenticated()" class="mlogin"><a href="#" onclick="$('#logout').submit()" class="login">| 로그아웃 |</a></li>
+
             <li>운영정보
                 <ul>
                     <li><a href="/Notification_info">질병정보</a></li>
-                    <li><a href="/operation_info ">작물 농사 방법</a></li>
+                    <li><a href="/operation_info">작물 농사 방법</a></li>
                 </ul>
             </li>
             <li>분양정보
@@ -47,18 +50,10 @@
                     <li><a href="/bbs/list/free">내 작물 무료나눔</a></li>
                 </ul>
             </li>
-            <li><a href="/MyPage">마이캘린더</a>
-                <ul>
-                    <li sec:authorize="isAnonymous()" class="login" ><a href="/login">로그인</a></li>
-                    <form id="login" action="/logout" method="POST">
-                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-                        <li sec:authorize="isAuthenticated()" class="login"><a href="/logout" type="submit">로그아웃</a></li>
-                    </form>
-                </ul>
-            </li>
+            <li><a href="/MyPage">마이캘린더</a></li>
         </ul>
     </nav>
-    <span sec:authorize="isAnonymous()" class="login"><a href="/login">로그인</a></span>
+    <span sec:authorize="isAnonymous()" class="login"><a href="/login">로그인</a><a href="/signup">회원가입</a></span>
 
     <form id="logout" action="/logout" method="POST">
             <span sec:authorize="isAuthenticated()">
