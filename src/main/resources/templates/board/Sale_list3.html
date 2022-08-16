@@ -67,16 +67,17 @@
 
 
         <div class="mapslist map_wrap" id="mapsSalelist">
-            <div id="menu_wrap" class="bg_white">
-                <div class="option">
-                    <div>
-                        <form onsubmit="setSaleList(keyword.value); return false;">
-                            <!-- 검색 -->
-                            키워드 : <input type="text" placeholder="검색어를 입력하세요" id="keyword" size="15">
-                            <button type="submit">검색하기</button>
-                        </form>
-                    </div>
+            <div class="option">
+                <div>
+                    <form onsubmit="setSaleList(keyword.value); return false;">
+                        <!-- 검색 -->
+                        키워드 : <input type="text" placeholder="검색어를 입력하세요" id="keyword" size="15">
+                        <button type="submit">검색하기</button>
+                    </form>
                 </div>
+            </div>
+            <div id="menu_wrap" class="bg_white">
+
                 <hr>
                 <ul id="placesList"></ul>
                 <div id="pagination"></div>
@@ -136,56 +137,54 @@
 
         // 주소를 좌표로 바꾸기 위한 geocoder 생성
         var geocoder = new kakao.maps.services.Geocoder();
-
         //-------------------------------------------  지도 로드 끝 --------------------------------------------------
-
-
-        const addressSearch = (idx,address) => {  
+        cnt = 1;
+        const addressSearch = (idx,address) => {
             return new Promise((resolve,reject) => {
                 //console.log("addressSearch" + address);
                 geocoder.addressSearch(address,function(result, status)  {
                     
                     if (status === kakao.maps.services.Status.OK) {
-                        console.log(results[idx].RDNMADR);
-                        console.log(results[idx].LO);
-                        console.log(result[0].address_name);
-                        console.log(result[0].x);
+                       // console.log(results[idx].RDNMADR);
+                       // console.log(results[idx].LO);
+                       // console.log(result[0].address_name);
+                       // console.log(result[0].x);
                         results[idx].LO = result[0].x;
                         results[idx].LA = result[0].y;
+                        console.log(cnt);
+                        cnt++;
+                        if(cnt == results.length){
+                            setSaleList("");
+                        }
                         resolve();
                     }
                 })
             })
         }
 
-
         function changeXY () {
-            $.each(results, function (index, val) {  
-                //console.log(results[index].LA);
+
+            $.each(results, function (index, val) {
 
                 (async () => {
                 await addressSearch(index,results[index].RDNMADR);
-                })(); 
+                })();
             })
         }
 
-        //전체 데이터 동기식으로 읽어오기
         $.ajax({
             url: saleurl, //API Call
             dataType: "json",
             type: "GET",
             async: false,
             success: function (data) {
-                //console.log('Received data:', data.vNtcnNgc002.row)
-                results = data.vNtcnNgc002.row; //전체 분양 정보 전역변수 등록 
-                //console.log(results[1].LA);
-                //kakao API를 이용해서 위도,경도를 업데이드 함
+                results = data.vNtcnNgc002.row; //전체 분양 정보 전역변수 등록
                 changeXY ();
             }, error: {}
         })
         function setSaleList(strSearch) {
 
-            console.log("setSaleList start");
+            //console.log("setSaleList start");
             //return new Promise((resolve,reject) => {
                 
                 var tmp = ""; //리스트 표시
@@ -210,7 +209,7 @@
                 map_load(0);
 
         }
-        setSaleList(strSearch); // 분양 정보 검색 리스트 항목
+        // 분양 정보 검색 리스트 항목
 
         //리스트를 가져온 후 위치값 넣기 
         function map_load(i) {
@@ -239,8 +238,8 @@
                 '        <div class="title">' + '  <div class="close" onclick="overlay.setMap(null);" title="닫기"></div>' + strTitle +
                 '        </div>' +
                 '        <div class="body">' +
-                '            <div class="desc">' +
-                '                <div class="ellipsis">주소 : ' + '<button onclick="showDetail('+i+');" class="btn btn-danger show MarkerButton" data-toggle="modal" data-target="#myModal" target="_blank">' + strRDNMADR + ' </button></div>' +
+                '            <div class="desc"  onclick="showDetail('+i+');" data-toggle="modal" data-target="#myModal" target="_blank">' +
+                '                <div class="ellipsis">주소 : ' + '<button  class="btn btn-danger show MarkerButton" data-toggle="modal" data-target="#myModal" target="_blank">' + strRDNMADR + ' </button></div>' +
                 '                <div class="jibun ellipsis"> 문의 : ' + strREFRNC + ' </div>' +
                 '                <div class="jibun ellipsis"> 이용대상 자치구 : ' + strGoo + ' </div>' +
                 '            </div>' +
